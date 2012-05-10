@@ -1,0 +1,8 @@
+//
+// Prefix header for all source files of the 'AnalyticX' target in the 'AnalyticX' project
+//
+
+#ifdef __OBJC__
+	#import <Foundation/Foundation.h>
+	#import <UIKit/UIKit.h>
+#endif
