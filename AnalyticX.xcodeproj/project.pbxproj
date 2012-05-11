@@ -176,6 +176,9 @@
 		10C15EF2155BADA900C83B73 /* RootViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10C15EF1155BADA900C83B73 /* RootViewController.mm */; };
 		10C15EF6155BADA900C83B73 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10C15EF5155BADA900C83B73 /* AppDelegate.cpp */; };
 		10C15EF9155BADA900C83B73 /* HelloWorldScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10C15EF8155BADA900C83B73 /* HelloWorldScene.cpp */; };
+		10C15F01155BAF9C00C83B73 /* libFlurryAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 10C15F00155BAF9C00C83B73 /* libFlurryAnalytics.a */; };
+		10C15F12155BC1D200C83B73 /* AnalyticX.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10C15F11155BC1D200C83B73 /* AnalyticX.mm */; };
+		10C15F14155BCF7E00C83B73 /* AnalyticXStringUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10C15F13155BCF7E00C83B73 /* AnalyticXStringUtil.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -541,6 +544,12 @@
 		10C15EF5155BADA900C83B73 /* AppDelegate.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AppDelegate.cpp; path = Classes/AppDelegate.cpp; sourceTree = "<group>"; };
 		10C15EF7155BADA900C83B73 /* HelloWorldScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HelloWorldScene.h; path = Classes/HelloWorldScene.h; sourceTree = "<group>"; };
 		10C15EF8155BADA900C83B73 /* HelloWorldScene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = HelloWorldScene.cpp; path = Classes/HelloWorldScene.cpp; sourceTree = "<group>"; };
+		10C15EFF155BAF9C00C83B73 /* FlurryAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FlurryAnalytics.h; path = ios/FlurryAnalytics.h; sourceTree = "<group>"; };
+		10C15F00155BAF9C00C83B73 /* libFlurryAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFlurryAnalytics.a; path = ios/libFlurryAnalytics.a; sourceTree = "<group>"; };
+		10C15F02155BB2ED00C83B73 /* AnalyticX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnalyticX.h; path = Classes/AnalyticX.h; sourceTree = "<group>"; };
+		10C15F11155BC1D200C83B73 /* AnalyticX.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AnalyticX.mm; path = ios/AnalyticX.mm; sourceTree = "<group>"; };
+		10C15F13155BCF7E00C83B73 /* AnalyticXStringUtil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AnalyticXStringUtil.mm; path = ios/AnalyticXStringUtil.mm; sourceTree = "<group>"; };
+		10C15F15155BCF9E00C83B73 /* AnalyticXStringUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnalyticXStringUtil.h; path = ios/AnalyticXStringUtil.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -556,6 +565,7 @@
 				10C15CC4155BADA600C83B73 /* UIKit.framework in Frameworks */,
 				10C15CC6155BADA600C83B73 /* Foundation.framework in Frameworks */,
 				10C15CC8155BADA600C83B73 /* CoreGraphics.framework in Frameworks */,
+				10C15F01155BAF9C00C83B73 /* libFlurryAnalytics.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1302,11 +1312,16 @@
 		10C15EEA155BADA900C83B73 /* ios */ = {
 			isa = PBXGroup;
 			children = (
+				10C15EFF155BAF9C00C83B73 /* FlurryAnalytics.h */,
+				10C15F00155BAF9C00C83B73 /* libFlurryAnalytics.a */,
 				10C15EEB155BADA900C83B73 /* main.m */,
 				10C15EED155BADA900C83B73 /* AppController.h */,
 				10C15EEE155BADA900C83B73 /* AppController.mm */,
 				10C15EF0155BADA900C83B73 /* RootViewController.h */,
 				10C15EF1155BADA900C83B73 /* RootViewController.mm */,
+				10C15F11155BC1D200C83B73 /* AnalyticX.mm */,
+				10C15F13155BCF7E00C83B73 /* AnalyticXStringUtil.mm */,
+				10C15F15155BCF9E00C83B73 /* AnalyticXStringUtil.h */,
 			);
 			name = ios;
 			sourceTree = "<group>";
@@ -1318,6 +1333,7 @@
 				10C15EF5155BADA900C83B73 /* AppDelegate.cpp */,
 				10C15EF7155BADA900C83B73 /* HelloWorldScene.h */,
 				10C15EF8155BADA900C83B73 /* HelloWorldScene.cpp */,
+				10C15F02155BB2ED00C83B73 /* AnalyticX.h */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1543,6 +1559,8 @@
 				10C15EF2155BADA900C83B73 /* RootViewController.mm in Sources */,
 				10C15EF6155BADA900C83B73 /* AppDelegate.cpp in Sources */,
 				10C15EF9155BADA900C83B73 /* HelloWorldScene.cpp in Sources */,
+				10C15F12155BC1D200C83B73 /* AnalyticX.mm in Sources */,
+				10C15F14155BCF7E00C83B73 /* AnalyticXStringUtil.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1611,6 +1629,10 @@
 				GCC_PREFIX_HEADER = AnalyticX/Prefix.pch;
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = AnalyticX/Resources/Info.plist;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/AnalyticX/ios\"",
+				);
 				OTHER_LDFLAGS = (
 					"-lxml2",
 					"-lz",
@@ -1629,6 +1651,10 @@
 				GCC_PREFIX_HEADER = AnalyticX/Prefix.pch;
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = AnalyticX/Resources/Info.plist;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/AnalyticX/ios\"",
+				);
 				OTHER_LDFLAGS = (
 					"-lxml2",
 					"-lz",

@@ -1,5 +1,6 @@
 #include "HelloWorldScene.h"
 #include "SimpleAudioEngine.h"
+#include "AnalyticX.h"
 
 using namespace cocos2d;
 using namespace CocosDenshion;
@@ -70,7 +71,9 @@ bool HelloWorld::init()
 
     // add the sprite as a child to this layer
     this->addChild(pSprite, 0);
-    
+
+    AnalyticX::flurryStartSession("QFNXVFK2XX4P56GS76EA");
+    AnalyticX::flurryLogEvent(" test X iPhone flurry event...");
     return true;
 }
 
