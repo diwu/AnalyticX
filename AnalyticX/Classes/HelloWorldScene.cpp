@@ -83,11 +83,6 @@ bool HelloWorld::init()
     AnalyticX::flurrySetDebugLogEnabled(false);
     AnalyticX::flurrySetSessionContinueSeconds(143);
     AnalyticX::flurrySetSecureTransportEnabled(false);
-
-    AnalyticX::flurrySetUserID("fake_user_id");
-    AnalyticX::flurrySetAge(34);
-    AnalyticX::flurrySetGender("f");
-    AnalyticX::flurrySetReportLocation(false);
     
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     AnalyticX::flurryStartSession("QFNXVFK2XX4P56GS76EA");
@@ -96,7 +91,12 @@ bool HelloWorld::init()
     AnalyticX::flurryStartSession("W7IBK43RJCHPT4IRP4HI");
 #endif
     
-    AnalyticX::flurryLogEvent(" #2 log event test...");
+    AnalyticX::flurrySetUserID("fake_user_id");
+    AnalyticX::flurrySetAge(34);
+    AnalyticX::flurrySetGender("f");
+    AnalyticX::flurrySetReportLocation(false);
+    
+    AnalyticX::flurryLogEvent("event_3");
     AnalyticX::flurryLogEventTimed(" log event timed test...", false);
 
     CCDictionary *testDict = new CCDictionary();
@@ -111,7 +111,7 @@ bool HelloWorld::init()
 
     testDict->setObject(testCCString, "key 1");
 
-    AnalyticX::flurryLogEventWithParameters(" - test flurryLogEventWithParameters", testDict);
+    AnalyticX::flurryLogEventWithParameters("event_5_with_params_no_timed", testDict);
 
     AnalyticX::flurryLogEventWithParametersTimed("test flurryLogEventWithParameters + timed", testDict, true);
     AnalyticX::flurryEndTimedEventWithParameters("test end event...", NULL);
