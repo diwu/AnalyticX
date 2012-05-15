@@ -126,7 +126,7 @@ bool HelloWorld::init()
     
     AnalyticX::flurryLogPageView();
     
-    AnalyticX::flurryEndSession();
+    //AnalyticX::flurryEndSession();
     return true;
 }
 
