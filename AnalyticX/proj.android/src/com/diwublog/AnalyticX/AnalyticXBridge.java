@@ -3,7 +3,6 @@ package com.diwublog.AnalyticX;
 import java.util.HashMap;
 
 import android.content.Context;
-import android.location.Criteria;
 import android.util.Log;
 
 import com.flurry.android.Constants;

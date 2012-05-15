@@ -53,7 +53,8 @@ xcuserdata
 
 #.LSOverride#
 
-AnalyticX/proj.android/libs
+!AnalyticX/proj.android/libs/FlurryAgent.jar
+AnalyticX/proj.android/libs/armeabi
 AnalyticX/proj.android/obj
 
 AnalyticX/proj.android/.classpath

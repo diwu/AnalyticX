@@ -98,7 +98,20 @@ bool HelloWorld::init()
     }
 #endif
     
-    AnalyticX::flurryLogEvent(" log event test...");
+    AnalyticX::flurrySetAppVersion("v_1_97");
+    cocos2d::CCLog("--->>>get flurry version = %s", AnalyticX::flurryGetFlurryAgentVersion());
+    AnalyticX::flurrySetDebugLogEnabled(false);
+    AnalyticX::flurrySetSessionContinueSeconds(143);
+    AnalyticX::flurrySetSecureTransportEnabled(false);
+
+    AnalyticX::flurrySetUserID("fake_user_id");
+    AnalyticX::flurrySetAge(34);
+    AnalyticX::flurrySetGender("f");
+    AnalyticX::flurrySetReportLocation(false);
+    
+    AnalyticX::flurryStartSession("W7IBK43RJCHPT4IRP4HI");
+    
+    AnalyticX::flurryLogEvent(" #2 log event test...");
     AnalyticX::flurryLogEventTimed(" log event timed test...", false);
     
     CCDictionary *testDict = new CCDictionary();
@@ -110,18 +123,10 @@ bool HelloWorld::init()
     AnalyticX::flurryLogEventWithParameters(" - test flurryLogEventWithParameters", testDict);
     AnalyticX::flurryLogEventWithParametersTimed("test flurryLogEventWithParameters + timed", testDict, true);
     AnalyticX::flurryEndTimedEventWithParameters("test end event...", NULL);
+    
     AnalyticX::flurryLogPageView();
-    AnalyticX::flurrySetAppVersion("v_1_97");
-    cocos2d::CCLog("--->>>get flurry version = %s", AnalyticX::flurryGetFlurryAgentVersion());
-    AnalyticX::flurrySetDebugLogEnabled(false);
-    AnalyticX::flurrySetSessionContinueSeconds(143);
-    AnalyticX::flurrySetSecureTransportEnabled(false);
-    AnalyticX::flurryStartSession("W7IBK43RJCHPT4IRP4HI");
+    
     AnalyticX::flurryEndSession();
-    AnalyticX::flurrySetUserID("fake_user_id");
-    AnalyticX::flurrySetAge(34);
-    AnalyticX::flurrySetGender("f");
-    AnalyticX::flurrySetReportLocation(false);
     return true;
 }
 
