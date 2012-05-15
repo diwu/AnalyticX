@@ -40,6 +40,10 @@ void AnalyticX::flurryStartSession(const char * apiKey) {
     [FlurryAnalytics startSession:[AnalyticXStringUtil nsstringFromCString:apiKey]];
 }
 
+void AnalyticX::flurryEndSession() {
+    //Android only
+}
+
 void AnalyticX::flurryLogEvent(const char * eventName) {
     [FlurryAnalytics logEvent:[AnalyticXStringUtil nsstringFromCString:eventName]];
 }
@@ -92,6 +96,12 @@ void AnalyticX::flurrySetSessionReportsOnPauseEnabled(bool setSessionReportsOnPa
 void AnalyticX::flurrySetEventLoggingEnabled(bool value) {
     [FlurryAnalytics setEventLoggingEnabled:value];
 }
+
+void AnalyticX::flurrySetReportLocation(bool reportLocation) {
+    //Android only
+}
+
+
 
 
 

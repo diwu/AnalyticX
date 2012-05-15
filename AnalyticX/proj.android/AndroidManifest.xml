@@ -25,4 +25,7 @@
                       android:smallScreens="true"
                       android:anyDensity="true"
                       android:normalScreens="true"/>
+    
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    
 </manifest> 

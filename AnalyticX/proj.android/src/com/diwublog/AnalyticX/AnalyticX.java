@@ -40,6 +40,8 @@ public class AnalyticX extends Cocos2dxActivity{
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		
+		AnalyticXBridge.sessionContext = this.getApplicationContext();
+		
 		if (detectOpenGLES20()) {
 			// get the packageName,it's used to set the resource path
 			String packageName = getApplication().getPackageName();
@@ -54,7 +56,8 @@ public class AnalyticX extends Cocos2dxActivity{
 		else {
 			Log.d("activity", "don't support gles2.0");
 			finish();
-		}	
+		}
+		
 	}
 	
 	 @Override
@@ -79,5 +82,16 @@ public class AnalyticX extends Cocos2dxActivity{
 	
      static {
          System.loadLibrary("game");
+     }
+     
+     static public void AnalyticXBridge(String someString)
+     {
+    	 Log.v("diwu", "analyticx bridge - from java...");
+    	 Log.v("diwu", "java string = " + someString);
+    	 Log.v("diwu", "just finished printing...");
+    	 /*
+    	 String someJString = String.valueOf(someString);
+    	 Log.v("diwu", "param = " + someJString);
+    	 */
      }
 }

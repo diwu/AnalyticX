@@ -2,6 +2,12 @@
 #include "SimpleAudioEngine.h"
 #include "AnalyticX.h"
 
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+#include <jni.h>
+#include "platform/android/jni/JniHelper.h"
+#include <android/log.h>
+#endif
+
 using namespace cocos2d;
 using namespace CocosDenshion;
 
@@ -76,7 +82,46 @@ bool HelloWorld::init()
     AnalyticX::flurryStartSession("QFNXVFK2XX4P56GS76EA");
     AnalyticX::flurryLogEvent(" test X iPhone flurry event...");
 #endif
+    
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+    JniMethodInfo minfo;
 
+    bool isHave = JniHelper::getStaticMethodInfo(minfo,"com/diwublog/AnalyticX/AnalyticX","AnalyticXBridge", "(Ljava/lang/String;)V"); 
+    
+    if (!isHave) {
+        CCLog("jni:此函数不存在");
+    }else{
+        CCLog("jni:此函数存在");
+        jstring stringArg = minfo.env->NewStringUTF("C++ to Java 汉字 string test...");
+        minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, stringArg);
+
+    }
+#endif
+    
+    AnalyticX::flurryLogEvent(" log event test...");
+    AnalyticX::flurryLogEventTimed(" log event timed test...", false);
+    
+    CCDictionary *testDict = new CCDictionary();
+    CCString *testCCString;
+    testCCString = CCString::stringWithCString("obj 0");
+    testDict->setObject(testCCString, "key 0");
+    testCCString = CCString::stringWithCString("obj 1");
+    testDict->setObject(testCCString, "key 1");
+    AnalyticX::flurryLogEventWithParameters(" - test flurryLogEventWithParameters", testDict);
+    AnalyticX::flurryLogEventWithParametersTimed("test flurryLogEventWithParameters + timed", testDict, true);
+    AnalyticX::flurryEndTimedEventWithParameters("test end event...", NULL);
+    AnalyticX::flurryLogPageView();
+    AnalyticX::flurrySetAppVersion("v_1_97");
+    cocos2d::CCLog("--->>>get flurry version = %s", AnalyticX::flurryGetFlurryAgentVersion());
+    AnalyticX::flurrySetDebugLogEnabled(false);
+    AnalyticX::flurrySetSessionContinueSeconds(143);
+    AnalyticX::flurrySetSecureTransportEnabled(false);
+    AnalyticX::flurryStartSession("W7IBK43RJCHPT4IRP4HI");
+    AnalyticX::flurryEndSession();
+    AnalyticX::flurrySetUserID("fake_user_id");
+    AnalyticX::flurrySetAge(34);
+    AnalyticX::flurrySetGender("f");
+    AnalyticX::flurrySetReportLocation(false);
     return true;
 }
 
