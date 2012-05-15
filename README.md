@@ -28,7 +28,7 @@ Requires ***cocos2d-2.0-rc0a-x-0.1.0*** or higher
 
     	<uses-permission android:name="android.permission.INTERNET"></uses-permission>
 
-#Use Separate Api Keys for Android and iOS
+#Use Separate Flurry Api Keys for Android and iOS
 	#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     	AnalyticX::flurryStartSession("YOUR_FLURRY_API_KEY_FOR_IPHONE_BUILD");
 	#endif
