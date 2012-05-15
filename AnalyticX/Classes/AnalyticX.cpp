@@ -12,78 +12,6 @@
 #include "platform/android/jni/JniHelper.h"
 #include <android/log.h>
 #include "AnalyticXStringUtilAndroid.h"
-/*
-void AnalyticX::flurrySetAppVersion(const char * version) {
-
-
-    cocos2d::JniMethodInfo minfo;
-    
-    bool isHave = cocos2d::JniHelper::getStaticMethodInfo(minfo,"com/diwublog/AnalyticX/AnalyticXBridge","Bridge", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V"); 
-    
-    if (!isHave) {
-        //do nothing
-    } else {
-        jstring stringArg0 = minfo.env->NewStringUTF("flurryLogEvent()");
-        jstring stringArg1 = minfo.env->NewStringUTF("arg 1 test...");
-        jstring stringArg2 = minfo.env->NewStringUTF("arg 2 test...");
-
-        minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, stringArg0, stringArg1, stringArg2);
-    }
-    
-    bool isHave_2 = cocos2d::JniHelper::getStaticMethodInfo(minfo,"com/diwublog/AnalyticX/AnalyticXBridge","Bridge", "(Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;)V"); 
-    
-    if (!isHave_2) {
-        //do nothing
-        cocos2d::CCLog("does not have this weird method");
-    } else {
-        cocos2d::CCLog("- have this weird method");
-        
-        JNIEnv *pEnv = minfo.env;
-        jclass ret = 0;
-        
-        if (!pEnv) {
-            cocos2d::CCLog(" !pEnv == YES");
-
-        } else {
-            cocos2d::CCLog(" !pEnv == NO");
-
-        }
-        
-        ret = pEnv->FindClass("[Ljava/lang/String;");
-        
-        if (ret == NULL) {
-            cocos2d::CCLog(" - 2 - String [] class not found...");
-        } else {
-            cocos2d::CCLog(" - 2 - String [] class is found :)");
-        } 
-        
-        jobjectArray result;
-        
-        result = pEnv->NewObjectArray(3, ret, NULL);
-
-        if (result == NULL) {
-            cocos2d::CCLog("failed to create a new jobjectArray");
-        } else {
-            cocos2d::CCLog("just created a new jobjectArray");
-        }  
-        
-        jstring stringElm0 = minfo.env->NewStringUTF("jstring elm 0");
-        jstring stringElm1 = minfo.env->NewStringUTF("jstring elm 1");
-        jstring stringElm2 = minfo.env->NewStringUTF("jstring elm 2");
-        
-        pEnv->SetObjectArrayElement(result, 0, stringElm0);
-        pEnv->SetObjectArrayElement(result, 1, stringElm1);
-        pEnv->SetObjectArrayElement(result, 2, stringElm2);
-
-        jstring stringArg0 = minfo.env->NewStringUTF("flurryLogEvent() - with Maps");
-        //jstring stringArg1 = minfo.env->NewStringUTF("arg 1 test...");
-        jstring stringArg2 = minfo.env->NewStringUTF("arg 2 test... - with Maps");
-
-        minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, stringArg0, result, stringArg2);
-
-    }
-}
-*/
 
 void AnalyticX::flurryLogEvent(const char * eventName) {
     
@@ -163,8 +91,8 @@ void AnalyticX::flurryLogEventWithParametersTimed(const char * eventName, cocos2
     }
 }
 
-// Since Flurry for Android does not support parameters in *endTimedEvent()*.
-// The parameters will be ignore when running in Android
+// Since Flurry for Android does not support *parameters* in *endTimedEvent()*.
+// This *parameters* will be ignored when running in Android
 void AnalyticX::flurryEndTimedEventWithParameters(const char * eventName, cocos2d::CCDictionary * parameters) {
     
     cocos2d::JniMethodInfo minfo;
