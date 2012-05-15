@@ -35,9 +35,15 @@
         return NULL;
     }
     
-    NSDictionary *nsDict = [NSDictionary dictionary];
+    cocos2d::CCLog("1");
     
-    for (int i = 0; ccDictionary->allKeys()->count(); i++) {
+    NSMutableDictionary *nsDict = [NSMutableDictionary dictionaryWithCapacity:ccDictionary->allKeys()->count()];
+    
+    cocos2d::CCLog("2");
+
+    for (int i = 0; i < ccDictionary->allKeys()->count(); i++) {
+        cocos2d::CCLog("3");
+
         [nsDict setValue:[AnalyticXStringUtil nsstringFromCString:((cocos2d::CCString *)ccDictionary->objectForKey(((cocos2d::CCString *)ccDictionary->allKeys()->objectAtIndex(i))->getCString()))->getCString()] forKey:[AnalyticXStringUtil nsstringFromCString:((cocos2d::CCString *)ccDictionary->allKeys()->objectAtIndex(i))->getCString()]];
     }
     

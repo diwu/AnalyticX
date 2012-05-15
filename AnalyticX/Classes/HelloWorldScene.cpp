@@ -77,26 +77,6 @@ bool HelloWorld::init()
 
     // add the sprite as a child to this layer
     this->addChild(pSprite, 0);
-
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    AnalyticX::flurryStartSession("QFNXVFK2XX4P56GS76EA");
-    AnalyticX::flurryLogEvent(" test X iPhone flurry event...");
-#endif
-    
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-    JniMethodInfo minfo;
-
-    bool isHave = JniHelper::getStaticMethodInfo(minfo,"com/diwublog/AnalyticX/AnalyticX","AnalyticXBridge", "(Ljava/lang/String;)V"); 
-    
-    if (!isHave) {
-        CCLog("jni:此函数不存在");
-    }else{
-        CCLog("jni:此函数存在");
-        jstring stringArg = minfo.env->NewStringUTF("C++ to Java 汉字 string test...");
-        minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, stringArg);
-
-    }
-#endif
     
     AnalyticX::flurrySetAppVersion("v_1_97");
     cocos2d::CCLog("--->>>get flurry version = %s", AnalyticX::flurryGetFlurryAgentVersion());
@@ -109,18 +89,30 @@ bool HelloWorld::init()
     AnalyticX::flurrySetGender("f");
     AnalyticX::flurrySetReportLocation(false);
     
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+    AnalyticX::flurryStartSession("QFNXVFK2XX4P56GS76EA");
+#endif
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
     AnalyticX::flurryStartSession("W7IBK43RJCHPT4IRP4HI");
+#endif
     
     AnalyticX::flurryLogEvent(" #2 log event test...");
     AnalyticX::flurryLogEventTimed(" log event timed test...", false);
-    
+
     CCDictionary *testDict = new CCDictionary();
+
     CCString *testCCString;
+
     testCCString = CCString::stringWithCString("obj 0");
+
     testDict->setObject(testCCString, "key 0");
+
     testCCString = CCString::stringWithCString("obj 1");
+
     testDict->setObject(testCCString, "key 1");
+
     AnalyticX::flurryLogEventWithParameters(" - test flurryLogEventWithParameters", testDict);
+
     AnalyticX::flurryLogEventWithParametersTimed("test flurryLogEventWithParameters + timed", testDict, true);
     AnalyticX::flurryEndTimedEventWithParameters("test end event...", NULL);
     

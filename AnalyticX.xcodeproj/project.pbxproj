@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1038CB55155D1257005E8BA9 /* AnalyticX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1038CB54155D1257005E8BA9 /* AnalyticX.cpp */; };
-		107965891560FA2100589E7D /* AnalyticXStringUtilAndroid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 107965881560FA2000589E7D /* AnalyticXStringUtilAndroid.cpp */; };
 		10C15CBA155BADA600C83B73 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10C15CB9155BADA600C83B73 /* QuartzCore.framework */; };
 		10C15CBC155BADA600C83B73 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10C15CBB155BADA600C83B73 /* OpenGLES.framework */; };
 		10C15CBE155BADA600C83B73 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10C15CBD155BADA600C83B73 /* OpenAL.framework */; };
@@ -184,9 +182,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1038CB54155D1257005E8BA9 /* AnalyticX.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AnalyticX.cpp; path = Classes/AnalyticX.cpp; sourceTree = "<group>"; };
-		107965861560FA1000589E7D /* AnalyticXStringUtilAndroid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnalyticXStringUtilAndroid.h; path = Classes/AnalyticXStringUtilAndroid.h; sourceTree = "<group>"; };
-		107965881560FA2000589E7D /* AnalyticXStringUtilAndroid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AnalyticXStringUtilAndroid.cpp; path = Classes/AnalyticXStringUtilAndroid.cpp; sourceTree = "<group>"; };
 		10C15CB5155BADA600C83B73 /* AnalyticX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AnalyticX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		10C15CB9155BADA600C83B73 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		10C15CBB155BADA600C83B73 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -1339,9 +1334,6 @@
 				10C15EF7155BADA900C83B73 /* HelloWorldScene.h */,
 				10C15EF8155BADA900C83B73 /* HelloWorldScene.cpp */,
 				10C15F02155BB2ED00C83B73 /* AnalyticX.h */,
-				1038CB54155D1257005E8BA9 /* AnalyticX.cpp */,
-				107965861560FA1000589E7D /* AnalyticXStringUtilAndroid.h */,
-				107965881560FA2000589E7D /* AnalyticXStringUtilAndroid.cpp */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1569,8 +1561,6 @@
 				10C15EF9155BADA900C83B73 /* HelloWorldScene.cpp in Sources */,
 				10C15F12155BC1D200C83B73 /* AnalyticX.mm in Sources */,
 				10C15F14155BCF7E00C83B73 /* AnalyticXStringUtil.mm in Sources */,
-				1038CB55155D1257005E8BA9 /* AnalyticX.cpp in Sources */,
-				107965891560FA2100589E7D /* AnalyticXStringUtilAndroid.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
