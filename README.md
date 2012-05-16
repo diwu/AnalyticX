@@ -18,19 +18,20 @@ A C++ wrapper of [Flurry](http://www.flurry.com/) for [Cocos2d-X](https://github
 
 #Add to Your Own Project - iOS
 1. Add ***FlurryAnalytics.h*** and ***libFlurryAnalytics.a*** to your Xcode project
-2. Add ***AnalyticX.h*** to your Xcode project
-3. Add ***AnalyticX.mm*** to your Xcode project
+2. Add ***AnalyticX.h*** and ***AnalyticX.mm*** to your Xcode project
+3. Add ***AnalyticXStringUtil.h*** and ***AnalyticXStringUtil.mm*** to your Xcode project
 
 #Add to Your Own Project - Android
 1. Add ***com.diwublog.AnalyticX*** the package and its ***AnalyticXBridge.java*** to your Eclipse project
 2. Add ***FlurryAgent.jar*** as an external jar to your Eclipse project
 3. Drop ***AnalyticX.h*** and ***AnalyticX.cpp*** to your ***Classes*** folder
-4. Add ***AnalyticX.cpp*** to your jni's ***Android.mk***
-5. In the java implementation of your main activity (which should have been created by the Cocos2d-X script), import ***com.diwublog.AnalyticX.AnalyticXBridge***
-6. At the beginning of ***onCreate(Bundle savedInstanceState)***, right after ***super.onCreate(savedInstanceState)***, add one line:
+4. Drop ***AnalyticXStringUtilAndroid*** and ***AnalyticXStringUtilAndroid.cpp*** to your ***Classes*** folder
+5. Add ***AnalyticX.cpp*** and ***AnalyticXStringUtilAndroid.cpp*** to your jni's ***Android.mk***
+6. In the java implementation of your main activity (which should have been created by the Cocos2d-X script), import ***com.diwublog.AnalyticX.AnalyticXBridge***
+7. At the beginning of ***onCreate(Bundle savedInstanceState)***, right after ***super.onCreate(savedInstanceState)***, add one line:
 
 		AnalyticXBridge.sessionContext = this.getApplicationContext();
-7. In the project manifest, add one line:
+8. In the project manifest, add one line:
 
     	<uses-permission android:name="android.permission.INTERNET"></uses-permission>
 
