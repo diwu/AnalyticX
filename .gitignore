@@ -54,6 +54,7 @@ xcuserdata
 #.LSOverride#
 
 !AnalyticX/proj.android/libs/FlurryAgent.jar
+!Add-To-Your-Own-Project/FlurryAgent.jar
 AnalyticX/proj.android/libs/armeabi
 AnalyticX/proj.android/obj
 
