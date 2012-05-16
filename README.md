@@ -6,6 +6,10 @@ A C++ wrapper of [Flurry](http://www.flurry.com/) for [Cocos2d-X](https://github
 #Environment
 ***cocos2d-2.0-rc0a-x-0.1.0*** or higher is recommended. Lower versions are not tested. Due to the underlying difference in the ***CCDictionary*** implementation, there may be compatibility issues when running on lower versions.
 
+#Flurry SDK Version
+1. Android: v2.2.5
+2. iOS: v3.0.9
+
 #Example Project
 1. iOS: ./AnalyticX.xcodeproj
 2. Android: ./AnalyticX/proj.android/
