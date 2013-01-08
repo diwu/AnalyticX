@@ -12,6 +12,9 @@
 #include "platform/android/jni/JniHelper.h"
 #include <android/log.h>
 #include "AnalyticXStringUtilAndroid.h"
+#include <string>
+
+using namespace std;
 
 void AnalyticX::flurryLogEvent(const char * eventName) {
     
@@ -60,8 +63,9 @@ void AnalyticX::flurryLogEventWithParameters(const char * eventName, cocos2d::CC
     if (!isHave) {
         //do nothing
     } else {
-
-        jstring stringArg0 = minfo.env->NewStringUTF("flurryLogEventWithParameters");
+        string eventNameString("flurryLogEventWithParameters,");
+        eventNameString += eventName;
+		jstring stringArg0 = minfo.env->NewStringUTF(eventNameString.c_str());
         jstring stringArg2 = minfo.env->NewStringUTF("false");
 
         minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, stringArg0, AnalyticXStringUtilAndroid::jobjectArrayFromCCDictionary(minfo, parameters), stringArg2);
@@ -78,8 +82,9 @@ void AnalyticX::flurryLogEventWithParametersTimed(const char * eventName, cocos2
     if (!isHave) {
         //do nothing
     } else {
-        
-        jstring stringArg0 = minfo.env->NewStringUTF("flurryLogEventWithParametersTimed");
+        string eventNameString("flurryLogEventWithParametersTimed,");
+        eventNameString += eventName;
+        jstring stringArg0 = minfo.env->NewStringUTF(eventNameString.c_str());
         jstring stringArg2 = minfo.env->NewStringUTF("false");
         
         if (timed == true) {
