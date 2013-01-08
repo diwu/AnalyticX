@@ -10,7 +10,7 @@ import com.flurry.android.FlurryAgent;
 
 public class AnalyticXBridge {
 	
-	static Context sessionContext;
+	public static Context sessionContext;
 	
 	static void Bridge (String arg0, String arg1, String arg2) {
 
@@ -49,8 +49,9 @@ public class AnalyticXBridge {
 	
 	static void Bridge (String arg0, String [] arg1, String arg2) {
 		Log.v("diwu", "string array count = " + arg1.length);
-		if (arg0.equalsIgnoreCase("flurryLogEventWithParameters")) {
-			AnalyticXBridge.flurryLogEventWithParameters(arg0, arg1);
+		String[] splitedString = arg0.split(",");
+		if (splitedString[0].equalsIgnoreCase("flurryLogEventWithParameters")) {
+			AnalyticXBridge.flurryLogEventWithParameters(splitedString[1], arg1);
 		} else if (arg0.equalsIgnoreCase("flurryLogEventWithParametersTimed")) {
 			AnalyticXBridge.flurryLogEventWithParametersTimed(arg0, arg1, arg2);
 		}
@@ -80,6 +81,7 @@ public class AnalyticXBridge {
 
 		for (int i = 0; i < parametersArray.length / 2; i++) {
 			Log.v("diwu", "elm" + i + " = " + parametersArray[i]);
+			Log.v("diwu", parametersArray[2*i] + " = " + parametersArray[2*i+1]);
 			someMap.put(parametersArray[2*i], parametersArray[2*i+1]);
 		}
 		
