@@ -176,9 +176,10 @@
 		10C15EF2155BADA900C83B73 /* RootViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10C15EF1155BADA900C83B73 /* RootViewController.mm */; };
 		10C15EF6155BADA900C83B73 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10C15EF5155BADA900C83B73 /* AppDelegate.cpp */; };
 		10C15EF9155BADA900C83B73 /* HelloWorldScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10C15EF8155BADA900C83B73 /* HelloWorldScene.cpp */; };
-		10C15F01155BAF9C00C83B73 /* libFlurryAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 10C15F00155BAF9C00C83B73 /* libFlurryAnalytics.a */; };
 		10C15F12155BC1D200C83B73 /* AnalyticX.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10C15F11155BC1D200C83B73 /* AnalyticX.mm */; };
 		10C15F14155BCF7E00C83B73 /* AnalyticXStringUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10C15F13155BCF7E00C83B73 /* AnalyticXStringUtil.mm */; };
+		6AA7C4AE16C81833008F02E5 /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AA7C4AC16C817FA008F02E5 /* libFlurry.a */; };
+		6AA7C4B216C81878008F02E5 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AA7C4B116C81878008F02E5 /* SystemConfiguration.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -544,12 +545,13 @@
 		10C15EF5155BADA900C83B73 /* AppDelegate.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AppDelegate.cpp; path = Classes/AppDelegate.cpp; sourceTree = "<group>"; };
 		10C15EF7155BADA900C83B73 /* HelloWorldScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HelloWorldScene.h; path = Classes/HelloWorldScene.h; sourceTree = "<group>"; };
 		10C15EF8155BADA900C83B73 /* HelloWorldScene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = HelloWorldScene.cpp; path = Classes/HelloWorldScene.cpp; sourceTree = "<group>"; };
-		10C15EFF155BAF9C00C83B73 /* FlurryAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FlurryAnalytics.h; path = ios/FlurryAnalytics.h; sourceTree = "<group>"; };
-		10C15F00155BAF9C00C83B73 /* libFlurryAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFlurryAnalytics.a; path = ios/libFlurryAnalytics.a; sourceTree = "<group>"; };
 		10C15F02155BB2ED00C83B73 /* AnalyticX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnalyticX.h; path = Classes/AnalyticX.h; sourceTree = "<group>"; };
 		10C15F11155BC1D200C83B73 /* AnalyticX.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AnalyticX.mm; path = ios/AnalyticX.mm; sourceTree = "<group>"; };
 		10C15F13155BCF7E00C83B73 /* AnalyticXStringUtil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AnalyticXStringUtil.mm; path = ios/AnalyticXStringUtil.mm; sourceTree = "<group>"; };
 		10C15F15155BCF9E00C83B73 /* AnalyticXStringUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnalyticXStringUtil.h; path = ios/AnalyticXStringUtil.h; sourceTree = "<group>"; };
+		6AA7C4AB16C817FA008F02E5 /* Flurry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Flurry.h; path = ios/Flurry.h; sourceTree = "<group>"; };
+		6AA7C4AC16C817FA008F02E5 /* libFlurry.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFlurry.a; path = ios/libFlurry.a; sourceTree = "<group>"; };
+		6AA7C4B116C81878008F02E5 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -557,6 +559,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6AA7C4B216C81878008F02E5 /* SystemConfiguration.framework in Frameworks */,
 				10C15CBA155BADA600C83B73 /* QuartzCore.framework in Frameworks */,
 				10C15CBC155BADA600C83B73 /* OpenGLES.framework in Frameworks */,
 				10C15CBE155BADA600C83B73 /* OpenAL.framework in Frameworks */,
@@ -565,7 +568,7 @@
 				10C15CC4155BADA600C83B73 /* UIKit.framework in Frameworks */,
 				10C15CC6155BADA600C83B73 /* Foundation.framework in Frameworks */,
 				10C15CC8155BADA600C83B73 /* CoreGraphics.framework in Frameworks */,
-				10C15F01155BAF9C00C83B73 /* libFlurryAnalytics.a in Frameworks */,
+				6AA7C4AE16C81833008F02E5 /* libFlurry.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -575,6 +578,7 @@
 		10C15CAA155BADA600C83B73 = {
 			isa = PBXGroup;
 			children = (
+				6AA7C4B116C81878008F02E5 /* SystemConfiguration.framework */,
 				10C15CC9155BADA600C83B73 /* AnalyticX */,
 				10C15CB8155BADA600C83B73 /* Frameworks */,
 				10C15CB6155BADA600C83B73 /* Products */,
@@ -1312,8 +1316,8 @@
 		10C15EEA155BADA900C83B73 /* ios */ = {
 			isa = PBXGroup;
 			children = (
-				10C15EFF155BAF9C00C83B73 /* FlurryAnalytics.h */,
-				10C15F00155BAF9C00C83B73 /* libFlurryAnalytics.a */,
+				6AA7C4AB16C817FA008F02E5 /* Flurry.h */,
+				6AA7C4AC16C817FA008F02E5 /* libFlurry.a */,
 				10C15EEB155BADA900C83B73 /* main.m */,
 				10C15EED155BADA900C83B73 /* AppController.h */,
 				10C15EEE155BADA900C83B73 /* AppController.mm */,
