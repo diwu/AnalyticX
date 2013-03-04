@@ -3,6 +3,10 @@
 #AnalyticX
 A C++ wrapper of [Flurry](http://www.flurry.com/) for [Cocos2d-X](https://github.com/cocos2d/cocos2d-x). Supports Android and iOS.
 
+#Changelog
+* Added reflection to AnalyticXStringUtil
+* Updated Flurry iOS SDK to version 4.0.0
+
 #Environment
 ***cocos2d-2.0-rc0a-x-0.1.0*** or higher is recommended. Lower versions are not tested. Due to the underlying difference in the ***CCDictionary*** implementation, there may be compatibility issues when running on lower versions.
 
@@ -85,3 +89,8 @@ When running on an iOS device, these APIs will have no effect. They are safe and
 
 #Email: <diwufet@gmail.com>
 #You're welcome to contribute. ;-)
+
+#Contributors
+* Di Wu
+* Anton Turko
+* François Dupayrat
