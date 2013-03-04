@@ -7,7 +7,7 @@
 //
 
 #include "AnalyticXStringUtilAndroid.h"
-
+#define isKindOfClass(obj,class) (dynamic_cast<class*>(obj) != NULL)
 jobjectArray AnalyticXStringUtilAndroid::jobjectArrayFromCCDictionary(cocos2d::JniMethodInfo minfo, cocos2d::CCDictionary * ccDictionary) {
     
     if (ccDictionary == NULL) {
