@@ -100,6 +100,7 @@ bool HelloWorld::init()
     AnalyticX::flurryLogEventTimed(" log event timed test...", false);
 
     CCDictionary *testDict = new CCDictionary();
+    testDict->autorelease();
 
     CCString *testCCString;
 
@@ -110,6 +111,20 @@ bool HelloWorld::init()
     testCCString = CCString::stringWithCString("obj 1");
 
     testDict->setObject(testCCString, "key 1");
+    
+    CCDictionary* testDictInternal = new CCDictionary();
+    testDictInternal->autorelease();
+    
+    testDict->setObject(testDictInternal, "key 2 : dictionary");
+    
+    CCArray* testArrayInternal = new CCArray();
+    testArrayInternal->autorelease();
+    
+    testDict->setObject(testArrayInternal, "key 3 : array");
+    
+    testDict->setObject(CCInteger::integerWithInt(5), "key 4 : int");
+    
+    testDict->setObject(CCDirector::sharedDirector(), "key 5 : CCDirector");
 
     AnalyticX::flurryLogEventWithParameters("event_5_with_params_no_timed", testDict);
 
