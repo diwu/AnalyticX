@@ -61,7 +61,7 @@
         }
         else if (isKindOfClass(obj, cocos2d::CCInteger))
         {
-            nsObject = [NSNumber numberWithInt:((cocos2d::CCInteger*)obj)->getValue()];
+            nsObject = [NSString stringWithFormat:@"%d", ((cocos2d::CCInteger*)obj)->getValue()];
         }
         else
         {
