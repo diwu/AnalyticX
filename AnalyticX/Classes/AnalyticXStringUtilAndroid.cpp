@@ -7,7 +7,7 @@
 //
 
 #include "AnalyticXStringUtilAndroid.h"
-
+#define isKindOfClass(obj,class) (dynamic_cast<class*>(obj) != NULL)
 jobjectArray AnalyticXStringUtilAndroid::jobjectArrayFromCCDictionary(cocos2d::JniMethodInfo minfo, cocos2d::CCDictionary * ccDictionary) {
     
     if (ccDictionary == NULL) {
@@ -33,15 +33,38 @@ jobjectArray AnalyticXStringUtilAndroid::jobjectArrayFromCCDictionary(cocos2d::J
     }
     
     for (int i = 0; i < ccDictionary->allKeys()->count(); i++) {
-
+        
+        cocos2d::CCObject* obj = ccDictionary->objectForKey(((cocos2d::CCString *)ccDictionary->allKeys()->objectAtIndex(i))->getCString());
+        cocos2d::CCString* value;
+        if(isKindOfClass(obj, cocos2d::CCDictionary))
+        {
+            value = cocos2d::CCString::create("Dictionary");
+        }
+        else if(isKindOfClass(obj, cocos2d::CCArray))
+        {
+            value = cocos2d::CCString::create("Array");
+        }
+        else if (isKindOfClass(obj, cocos2d::CCString))
+        {
+            value = (CCString*)obj;
+        }
+        else if (isKindOfClass(obj, cocos2d::CCInteger))
+        {
+            value = cocos2d::CCString::createWithFormat("%d", ((cocos2d::CCInteger*)obj)->getValue());
+        }
+        else
+        {
+            value = cocos2d::CCString::create("Unknown Object");
+        }
+        
         jstring keyString = minfo.env->NewStringUTF(((cocos2d::CCString *)ccDictionary->allKeys()->objectAtIndex(i))->getCString());
-
-        jstring objectString = minfo.env->NewStringUTF(((cocos2d::CCString *)ccDictionary->objectForKey(((cocos2d::CCString *)ccDictionary->allKeys()->objectAtIndex(i))->getCString()))->getCString());
-
+        
+        jstring objectString = minfo.env->NewStringUTF(value);
+        
         pEnv->SetObjectArrayElement(result, i * 2, keyString);
-
+        
         pEnv->SetObjectArrayElement(result, i * 2 + 1, objectString);
-
+        
     }
     
     return result;

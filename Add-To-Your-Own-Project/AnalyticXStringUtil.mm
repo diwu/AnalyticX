@@ -43,8 +43,31 @@
 
     for (int i = 0; i < ccDictionary->allKeys()->count(); i++) {
         cocos2d::CCLog("3");
-
-        [nsDict setValue:[AnalyticXStringUtil nsstringFromCString:((cocos2d::CCString *)ccDictionary->objectForKey(((cocos2d::CCString *)ccDictionary->allKeys()->objectAtIndex(i))->getCString()))->getCString()] forKey:[AnalyticXStringUtil nsstringFromCString:((cocos2d::CCString *)ccDictionary->allKeys()->objectAtIndex(i))->getCString()]];
+        
+        cocos2d::CCObject* obj = ccDictionary->objectForKey(((cocos2d::CCString *)ccDictionary->allKeys()->objectAtIndex(i))->getCString());
+        NSObject* nsObject;
+        if(isKindOfClass(obj, cocos2d::CCDictionary))
+        {
+            nsObject = @"Dictionary";
+        }
+        else if(isKindOfClass(obj, cocos2d::CCArray))
+        {
+            nsObject = @"Array";
+        }
+        else if (isKindOfClass(obj, cocos2d::CCString))
+        {
+            const char* cstring = ((cocos2d::CCString*)obj)->getCString();
+            nsObject = [[[NSString alloc] initWithBytes:cstring length:strlen(cstring) encoding:NSUTF8StringEncoding] autorelease];
+        }
+        else if (isKindOfClass(obj, cocos2d::CCInteger))
+        {
+            nsObject = [NSString stringWithFormat:@"%d", ((cocos2d::CCInteger*)obj)->getValue()];
+        }
+        else
+        {
+            nsObject = @"Unknown Object";
+        }
+        [nsDict setValue:nsObject forKey:[AnalyticXStringUtil nsstringFromCString:((cocos2d::CCString *)ccDictionary->allKeys()->objectAtIndex(i))->getCString()]];
     }
     
     return nsDict;
