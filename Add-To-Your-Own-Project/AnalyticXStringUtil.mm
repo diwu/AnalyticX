@@ -8,6 +8,8 @@
 
 #import "AnalyticXStringUtil.h"
 
+#define isKindOfClass(obj,class) (dynamic_cast<class*>(obj) != NULL)
+
 @implementation AnalyticXStringUtil
 
 + (NSString *)nsstringFromCString:(const char *)cstring {

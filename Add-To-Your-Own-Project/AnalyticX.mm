@@ -7,37 +7,37 @@
 //
 
 #include "AnalyticX.h"
-#import "FlurryAnalytics.h"
+#import "Flurry.h"
 #import "AnalyticXStringUtil.h"
 
 void AnalyticX::flurrySetAppVersion(const char * version) {
     NSString *versionString = [AnalyticXStringUtil nsstringFromCString:version];
-    [FlurryAnalytics setAppVersion:versionString];
+    [Flurry setAppVersion:versionString];
 }
 
 const char * AnalyticX::flurryGetFlurryAgentVersion() {
-    NSString *versionString = [FlurryAnalytics getFlurryAgentVersion];
+    NSString *versionString = [Flurry getFlurryAgentVersion];
     return [AnalyticXStringUtil cstringFromNSString:versionString];
 }
 
 void AnalyticX::flurrySetShowErrorInLogEnabled(bool value) {
-    [FlurryAnalytics setShowErrorInLogEnabled:value];
+    [Flurry setShowErrorInLogEnabled:value];
 }
 
 void AnalyticX::flurrySetDebugLogEnabled(bool value) {
-    [FlurryAnalytics setDebugLogEnabled:value];
+    [Flurry setDebugLogEnabled:value];
 }
 
 void AnalyticX::flurrySetSessionContinueSeconds(int seconds) {
-    [FlurryAnalytics setSessionContinueSeconds:seconds];
+    [Flurry setSessionContinueSeconds:seconds];
 }
 
 void AnalyticX::flurrySetSecureTransportEnabled(bool value) {
-    [FlurryAnalytics setSecureTransportEnabled:value];
+    [Flurry setSecureTransportEnabled:value];
 }
 
 void AnalyticX::flurryStartSession(const char * apiKey) {
-    [FlurryAnalytics startSession:[AnalyticXStringUtil nsstringFromCString:apiKey]];
+    [Flurry startSession:[AnalyticXStringUtil nsstringFromCString:apiKey]];
 }
 
 void AnalyticX::flurryEndSession() {
@@ -45,56 +45,56 @@ void AnalyticX::flurryEndSession() {
 }
 
 void AnalyticX::flurryLogEvent(const char * eventName) {
-    [FlurryAnalytics logEvent:[AnalyticXStringUtil nsstringFromCString:eventName]];
+    [Flurry logEvent:[AnalyticXStringUtil nsstringFromCString:eventName]];
 }
 
 void AnalyticX::flurryLogEventWithParameters(const char * eventName, cocos2d::CCDictionary * parameters) {
     
-    [FlurryAnalytics logEvent:[AnalyticXStringUtil nsstringFromCString:eventName] withParameters:[AnalyticXStringUtil nsDictionaryFromCCDictionary:parameters]];
+    [Flurry logEvent:[AnalyticXStringUtil nsstringFromCString:eventName] withParameters:[AnalyticXStringUtil nsDictionaryFromCCDictionary:parameters]];
 }
 
 void AnalyticX::flurryLogEventTimed(const char * eventName, bool timed) {
-    [FlurryAnalytics logEvent:[AnalyticXStringUtil nsstringFromCString:eventName] timed:timed];
+    [Flurry logEvent:[AnalyticXStringUtil nsstringFromCString:eventName] timed:timed];
 }
 
 void AnalyticX::flurryLogEventWithParametersTimed(const char * eventName, cocos2d::CCDictionary * parameters, bool timed) {
-    [FlurryAnalytics logEvent:[AnalyticXStringUtil nsstringFromCString:eventName] withParameters:[AnalyticXStringUtil nsDictionaryFromCCDictionary:parameters] timed:timed];
+    [Flurry logEvent:[AnalyticXStringUtil nsstringFromCString:eventName] withParameters:[AnalyticXStringUtil nsDictionaryFromCCDictionary:parameters] timed:timed];
 }
 
 void AnalyticX::flurryEndTimedEventWithParameters(const char * eventName, cocos2d::CCDictionary * parameters) {
-    [FlurryAnalytics endTimedEvent:[AnalyticXStringUtil nsstringFromCString:eventName] withParameters:[AnalyticXStringUtil nsDictionaryFromCCDictionary:parameters]];
+    [Flurry endTimedEvent:[AnalyticXStringUtil nsstringFromCString:eventName] withParameters:[AnalyticXStringUtil nsDictionaryFromCCDictionary:parameters]];
 }
 
 void AnalyticX::flurryLogPageView() {
-    [FlurryAnalytics logPageView];
+    [Flurry logPageView];
 }
 
 void AnalyticX::flurrySetUserID(const char * userID) {
-    [FlurryAnalytics setUserID:[AnalyticXStringUtil nsstringFromCString:userID]];
+    [Flurry setUserID:[AnalyticXStringUtil nsstringFromCString:userID]];
 }
 
 void AnalyticX::flurrySetAge(int age) {
-    [FlurryAnalytics setAge:age];
+    [Flurry setAge:age];
 }
 
 void AnalyticX::flurrySetGender(const char * gender) {
-    [FlurryAnalytics setGender:[AnalyticXStringUtil nsstringFromCString:gender]];
+    [Flurry setGender:[AnalyticXStringUtil nsstringFromCString:gender]];
 }
 
 void AnalyticX::flurrySetLatitudeLongitudeHorizontalAccuracyVerticalAccuracy(double latitude, double longitude, float horizontalAccuracy, float verticalAccuracy) {
-    [FlurryAnalytics setLatitude:latitude longitude:longitude horizontalAccuracy:horizontalAccuracy verticalAccuracy:verticalAccuracy];
+    [Flurry setLatitude:latitude longitude:longitude horizontalAccuracy:horizontalAccuracy verticalAccuracy:verticalAccuracy];
 }
 
 void AnalyticX::flurrySetSessionReportsOnCloseEnabled(bool sendSessionReportsOnClose) {
-    [FlurryAnalytics setSessionReportsOnCloseEnabled:sendSessionReportsOnClose];
+    [Flurry setSessionReportsOnCloseEnabled:sendSessionReportsOnClose];
 }
 
 void AnalyticX::flurrySetSessionReportsOnPauseEnabled(bool setSessionReportsOnPauseEnabled) {
-    [FlurryAnalytics setSessionReportsOnPauseEnabled:setSessionReportsOnPauseEnabled];
+    [Flurry setSessionReportsOnPauseEnabled:setSessionReportsOnPauseEnabled];
 }
 
 void AnalyticX::flurrySetEventLoggingEnabled(bool value) {
-    [FlurryAnalytics setEventLoggingEnabled:value];
+    [Flurry setEventLoggingEnabled:value];
 }
 
 void AnalyticX::flurrySetReportLocation(bool reportLocation) {
