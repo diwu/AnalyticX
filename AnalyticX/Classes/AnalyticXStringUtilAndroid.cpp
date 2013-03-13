@@ -46,7 +46,7 @@ jobjectArray AnalyticXStringUtilAndroid::jobjectArrayFromCCDictionary(cocos2d::J
         }
         else if (isKindOfClass(obj, cocos2d::CCString))
         {
-            value = (CCString*)obj;
+            value = (cocos2d::CCString*)obj;
         }
         else if (isKindOfClass(obj, cocos2d::CCInteger))
         {
@@ -59,7 +59,7 @@ jobjectArray AnalyticXStringUtilAndroid::jobjectArrayFromCCDictionary(cocos2d::J
         
         jstring keyString = minfo.env->NewStringUTF(((cocos2d::CCString *)ccDictionary->allKeys()->objectAtIndex(i))->getCString());
         
-        jstring objectString = minfo.env->NewStringUTF(value);
+        jstring objectString = minfo.env->NewStringUTF(value->getCString());
         
         pEnv->SetObjectArrayElement(result, i * 2, keyString);
         
