@@ -22,7 +22,7 @@ jobjectArray AnalyticXStringUtilAndroid::jobjectArrayFromCCDictionary(cocos2d::J
     JNIEnv *pEnv = minfo.env;
     jclass jStringCls = 0;
         
-    jStringCls = pEnv->FindClass("[Ljava/lang/String;");
+    jStringCls = pEnv->FindClass("java/lang/String");
         
     jobjectArray result;
         
