@@ -51,6 +51,22 @@ A C++ wrapper of [Flurry](http://www.flurry.com/) for [Cocos2d-X](https://github
 		#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
     		AnalyticX::flurryStartSession("YOUR_FLURRY_API_KEY_FOR_ANDROID_BUILD");
 		#endif
+4. For Android, you need to end the session when the app goes in the background or when you manually quit the application, else the events may not be recorded on Flurry website. First, add the calls in your AppDelegate.cpp :		
+		
+		void AppDelegate::applicationDidEnterBackground()
+		{
+    		AnalyticX::flurryEndSession();
+			//Your code
+		}
+
+		void AppDelegate::applicationDidEnterForeground()
+		{
+	    	AnalyticX::flurryStartSession("YOUR_FLURRY_API_KEY_FOR_ANDROID_BUILD");
+			//Your code
+		}
+5. After that, before any call to exit(0), add this code :		
+		
+    	AnalyticX::flurryEndSession();
 
 #APIs Supported on both Android and iOS
     static void flurrySetAppVersion(const char * version);
