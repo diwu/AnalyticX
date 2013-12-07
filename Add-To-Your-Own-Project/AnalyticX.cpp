@@ -30,6 +30,11 @@ void AnalyticX::flurryLogEvent(const char * eventName) {
         jstring stringArg2 = minfo.env->NewStringUTF("false");
 
         minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, stringArg0, stringArg1, stringArg2);
+		
+		minfo.env->DeleteLocalRef(stringArg0);
+		minfo.env->DeleteLocalRef(stringArg1);
+		minfo.env->DeleteLocalRef(stringArg2);
+		minfo.env->DeleteLocalRef(minfo.classID);
     }
 }
 
@@ -52,6 +57,11 @@ void AnalyticX::flurryLogEventTimed(const char * eventName, bool timed) {
         }
         
         minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, stringArg0, stringArg1, stringArg2);
+		
+		minfo.env->DeleteLocalRef(stringArg0);
+		minfo.env->DeleteLocalRef(stringArg1);
+		minfo.env->DeleteLocalRef(stringArg2);
+		minfo.env->DeleteLocalRef(minfo.classID);
     }
 }
 
@@ -69,7 +79,10 @@ void AnalyticX::flurryLogEventWithParameters(const char * eventName, cocos2d::CC
         jstring stringArg2 = minfo.env->NewStringUTF("false");
 
         minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, stringArg0, AnalyticXStringUtilAndroid::jobjectArrayFromCCDictionary(minfo, parameters), stringArg2);
-
+		
+		minfo.env->DeleteLocalRef(stringArg0);
+		minfo.env->DeleteLocalRef(stringArg2);
+		minfo.env->DeleteLocalRef(minfo.classID);
     }
 }
 
@@ -93,6 +106,9 @@ void AnalyticX::flurryLogEventWithParametersTimed(const char * eventName, cocos2
         
         minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, stringArg0, AnalyticXStringUtilAndroid::jobjectArrayFromCCDictionary(minfo, parameters), stringArg2);
         
+		minfo.env->DeleteLocalRef(stringArg0);
+		minfo.env->DeleteLocalRef(stringArg2);
+		minfo.env->DeleteLocalRef(minfo.classID);
     }
 }
 
@@ -112,6 +128,11 @@ void AnalyticX::flurryEndTimedEventWithParameters(const char * eventName, cocos2
         jstring stringArg2 = minfo.env->NewStringUTF("false");
         
         minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, stringArg0, stringArg1, stringArg2);
+		
+		minfo.env->DeleteLocalRef(stringArg0);
+		minfo.env->DeleteLocalRef(stringArg1);
+		minfo.env->DeleteLocalRef(stringArg2);
+		minfo.env->DeleteLocalRef(minfo.classID);
     }
 }
 
@@ -129,6 +150,11 @@ void AnalyticX::flurryLogPageView() {
         jstring stringArg2 = minfo.env->NewStringUTF("false");
         
         minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, stringArg0, stringArg1, stringArg2);
+		
+		minfo.env->DeleteLocalRef(stringArg0);
+		minfo.env->DeleteLocalRef(stringArg1);
+		minfo.env->DeleteLocalRef(stringArg2);
+		minfo.env->DeleteLocalRef(minfo.classID);
     }
 }
 
@@ -146,6 +172,11 @@ void AnalyticX::flurrySetAppVersion(const char * version) {
         jstring stringArg2 = minfo.env->NewStringUTF("false");
         
         minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, stringArg0, stringArg1, stringArg2);
+		
+		minfo.env->DeleteLocalRef(stringArg0);
+		minfo.env->DeleteLocalRef(stringArg1);
+		minfo.env->DeleteLocalRef(stringArg2);
+		minfo.env->DeleteLocalRef(minfo.classID);
     }
 }
 
@@ -162,6 +193,9 @@ const char * AnalyticX::flurryGetFlurryAgentVersion() {
         jint version =  minfo.env->CallStaticIntMethod(minfo.classID, minfo.methodID);
         static char result[20];
         sprintf(result, "%d", version);
+		
+		//minfo.env->DeleteLocalRef(version);
+		minfo.env->DeleteLocalRef(minfo.classID);
         return result;
     }
 }
@@ -188,6 +222,11 @@ void AnalyticX::flurrySetDebugLogEnabled(bool value) {
         }
         
         minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, stringArg0, stringArg1, stringArg2);
+		
+		minfo.env->DeleteLocalRef(stringArg0);
+		minfo.env->DeleteLocalRef(stringArg1);
+		minfo.env->DeleteLocalRef(stringArg2);
+		minfo.env->DeleteLocalRef(minfo.classID);
     }
 }
 
@@ -201,6 +240,7 @@ void AnalyticX::flurrySetSessionContinueSeconds(int seconds) {
         //do nothing
     } else {        
         minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, (jint)seconds);
+		minfo.env->DeleteLocalRef(minfo.classID);
     }
 }
 
@@ -221,6 +261,11 @@ void AnalyticX::flurrySetSecureTransportEnabled(bool value) {
         }
         
         minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, stringArg0, stringArg1, stringArg2);
+		
+		minfo.env->DeleteLocalRef(stringArg0);
+		minfo.env->DeleteLocalRef(stringArg1);
+		minfo.env->DeleteLocalRef(stringArg2);
+		minfo.env->DeleteLocalRef(minfo.classID);
     }
 }
 
@@ -238,6 +283,11 @@ void AnalyticX::flurryStartSession(const char * apiKey) {
         jstring stringArg2 = minfo.env->NewStringUTF("false");
         
         minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, stringArg0, stringArg1, stringArg2);
+		
+		minfo.env->DeleteLocalRef(stringArg0);
+		minfo.env->DeleteLocalRef(stringArg1);
+		minfo.env->DeleteLocalRef(stringArg2);
+		minfo.env->DeleteLocalRef(minfo.classID);
     }
 }
 
@@ -255,6 +305,11 @@ void AnalyticX::flurryEndSession() {
         jstring stringArg2 = minfo.env->NewStringUTF("false");
         
         minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, stringArg0, stringArg1, stringArg2);
+		
+		minfo.env->DeleteLocalRef(stringArg0);
+		minfo.env->DeleteLocalRef(stringArg1);
+		minfo.env->DeleteLocalRef(stringArg2);
+		minfo.env->DeleteLocalRef(minfo.classID);
     }
 }
 
@@ -272,6 +327,11 @@ void AnalyticX::flurrySetUserID(const char * userID) {
         jstring stringArg2 = minfo.env->NewStringUTF("false");
         
         minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, stringArg0, stringArg1, stringArg2);
+		
+		minfo.env->DeleteLocalRef(stringArg0);
+		minfo.env->DeleteLocalRef(stringArg1);
+		minfo.env->DeleteLocalRef(stringArg2);
+		minfo.env->DeleteLocalRef(minfo.classID);
     }
 }
 
@@ -285,6 +345,7 @@ void AnalyticX::flurrySetAge(int age) {
         //do nothing
     } else {        
         minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, (jint)age);
+		minfo.env->DeleteLocalRef(minfo.classID);
     }
 }
 
@@ -307,6 +368,11 @@ void AnalyticX::flurrySetGender(const char * gender) {
         }
         
         minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, stringArg0, stringArg1, stringArg2);
+		
+		minfo.env->DeleteLocalRef(stringArg0);
+		minfo.env->DeleteLocalRef(stringArg1);
+		minfo.env->DeleteLocalRef(stringArg2);
+		minfo.env->DeleteLocalRef(minfo.classID);
     }
     
 }
@@ -332,6 +398,11 @@ void AnalyticX::flurrySetReportLocation(bool reportLocation) {
         }
         
         minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, stringArg0, stringArg1, stringArg2);
+		
+		minfo.env->DeleteLocalRef(stringArg0);
+		minfo.env->DeleteLocalRef(stringArg1);
+		minfo.env->DeleteLocalRef(stringArg2);
+		minfo.env->DeleteLocalRef(minfo.classID);
     }
 }
 

@@ -38,6 +38,8 @@ public:
     static void flurrySetSessionContinueSeconds(int seconds);
     //iOS + Android
     static void flurrySetSecureTransportEnabled(bool value);
+    //iOS + Android
+	static void flurrySetCrashReportingEnabled(bool value);
     
     /*
      start session, attempt to send saved sessions to server 
