@@ -15,7 +15,9 @@ public:
     // a selector callback
     virtual void menuCloseCallback(CCObject* pSender);
     
-    // a function to make the app crash with intentional
+    // add action to begin crashing the app
+    void beginProcessToCrashApp(CCObject* pSender);
+    // actually crash the app
     void makeItCrash();
 
     // implement the "static node()" method manually

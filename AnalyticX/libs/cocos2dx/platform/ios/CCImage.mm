@@ -88,7 +88,7 @@ static bool _initWithImage(CGImageRef cgImage, tImageInfo *pImageinfo)
                                                  pImageinfo->width, 
                                                  pImageinfo->height,
                                                  8, 
-                                                 4 * pImageinfo->width, 
+                                                 4 * pImageinfo->width,
                                                  colorSpace, 
                                                  info | kCGBitmapByteOrder32Big);
     
@@ -277,7 +277,7 @@ static bool _initWithString(const char * pText, cocos2d::CCImage::ETextAlign eAl
         
         // draw text
         CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();    
-        CGContextRef context = CGBitmapContextCreate(data, dim.width, dim.height, 8, dim.width * 4, colorSpace, kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big);
+        CGContextRef context = CGBitmapContextCreate(data, dim.width, dim.height, 8, (int)(dim.width) * 4, colorSpace, kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big);
         CGColorSpaceRelease(colorSpace);
         
         if (! context)
@@ -297,19 +297,7 @@ static bool _initWithString(const char * pText, cocos2d::CCImage::ETextAlign eAl
                                 : (3 == uHoriFlag) ? UITextAlignmentCenter
                                 : UITextAlignmentLeft;
         
-        // normal fonts
-    if( [font isKindOfClass:[UIFont class] ] )
-    {
-        [str drawInRect:CGRectMake(0, startH, dim.width, dim.height) withFont:font lineBreakMode:UILineBreakModeWordWrap alignment:align];
-    }
-    
-#if CC_FONT_LABEL_SUPPORT
-    else // ZFont class 
-    {
-        [FontLabelStringDrawingHelper drawInRect:str rect:CGRectMake(0, startH, dim.width, dim.height) withZFont:font lineBreakMode:UILineBreakModeWordWrap alignment:align];
-    }
-#endif
-        
+        [str drawInRect:CGRectMake(0, startH, dim.width, dim.height) withFont:font lineBreakMode:NSLineBreakByWordWrapping alignment:(NSTextAlignment)align];
         UIGraphicsPopContext();
         
         CGContextRelease(context);
