@@ -36,6 +36,10 @@ void AnalyticX::flurrySetSecureTransportEnabled(bool value) {
     [Flurry setSecureTransportEnabled:value];
 }
 
+void AnalyticX::flurrySetCrashReportingEnabled(bool value) {
+    [Flurry setCrashReportingEnabled:value];
+}
+
 void AnalyticX::flurryStartSession(const char * apiKey) {
     [Flurry startSession:[AnalyticXStringUtil nsstringFromCString:apiKey]];
 }

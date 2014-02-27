@@ -83,6 +83,7 @@ bool HelloWorld::init()
     AnalyticX::flurrySetDebugLogEnabled(false);
     AnalyticX::flurrySetSessionContinueSeconds(143);
     AnalyticX::flurrySetSecureTransportEnabled(false);
+    AnalyticX::flurrySetCrashReportingEnabled(true);
     
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     AnalyticX::flurryStartSession("QFNXVFK2XX4P56GS76EA");
@@ -134,6 +135,13 @@ bool HelloWorld::init()
     AnalyticX::flurryLogPageView();
     
     //AnalyticX::flurryEndSession();
+    
+    // create action to delay for a short amount of time, then crash the program
+    CCDelayTime *delay = CCDelayTime::actionWithDuration(5.0f);
+    CCCallFunc *crash = CCCallFunc::actionWithTarget(this, callfunc_selector(HelloWorld::makeItCrash));
+    CCSequence *action = CCSequence::actionOneTwo(delay, crash);
+    this->runAction(action);
+    
     return true;
 }
 
@@ -144,4 +152,11 @@ void HelloWorld::menuCloseCallback(CCObject* pSender)
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     exit(0);
 #endif
+}
+
+void HelloWorld::makeItCrash()
+{
+    // intentionally make it crashes
+    CCNode *node = NULL;
+    node->getChildrenCount();
 }
