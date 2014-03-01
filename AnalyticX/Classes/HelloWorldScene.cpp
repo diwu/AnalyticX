@@ -35,6 +35,9 @@ bool HelloWorld::init()
     {
         return false;
     }
+    
+    // ask director the window size
+    CCSize size = CCDirector::sharedDirector()->getWinSize();
 
     /////////////////////////////
     // 2. add a menu item with "X" image, which is clicked to quit the program
@@ -46,10 +49,15 @@ bool HelloWorld::init()
                                         "CloseSelected.png",
                                         this,
                                         menu_selector(HelloWorld::menuCloseCallback) );
-    pCloseItem->setPosition( ccp(CCDirector::sharedDirector()->getWinSize().width - 20, 20) );
+    pCloseItem->setPosition( ccp(size.width - 20, 20) );
+    
+    // add a menu font to activate crashing app
+    CCMenuItemFont::setFontSize(25);
+    CCMenuItemFont *menuCrashItem = CCMenuItemFont::itemWithString("Test Crash", this, menu_selector(HelloWorld::makeItCrash));
+    menuCrashItem->setPosition(ccp(size.width/2, menuCrashItem->getContentSize().height));
 
     // create menu, it's an autorelease object
-    CCMenu* pMenu = CCMenu::menuWithItems(pCloseItem, NULL);
+    CCMenu* pMenu = CCMenu::menuWithItems(pCloseItem, menuCrashItem, NULL);
     pMenu->setPosition( CCPointZero );
     this->addChild(pMenu, 1);
 
@@ -59,9 +67,6 @@ bool HelloWorld::init()
     // add a label shows "Hello World"
     // create and initialize a label
     CCLabelTTF* pLabel = CCLabelTTF::labelWithString("Hello World", "Thonburi", 34);
-
-    // ask director the window size
-    CCSize size = CCDirector::sharedDirector()->getWinSize();
 
     // position the label on the center of the screen
     pLabel->setPosition( ccp(size.width / 2, size.height - 20) );
@@ -83,6 +88,7 @@ bool HelloWorld::init()
     AnalyticX::flurrySetDebugLogEnabled(false);
     AnalyticX::flurrySetSessionContinueSeconds(143);
     AnalyticX::flurrySetSecureTransportEnabled(false);
+    AnalyticX::flurrySetCrashReportingEnabled(true);
     
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     AnalyticX::flurryStartSession("QFNXVFK2XX4P56GS76EA");
@@ -134,6 +140,7 @@ bool HelloWorld::init()
     AnalyticX::flurryLogPageView();
     
     //AnalyticX::flurryEndSession();
+    
     return true;
 }
 
@@ -144,4 +151,25 @@ void HelloWorld::menuCloseCallback(CCObject* pSender)
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     exit(0);
 #endif
+}
+
+void HelloWorld::beginProcessToCrashApp(CCObject* pSender)
+{
+    // disable the menu (as we just want to crash it once and for all)
+    CCMenuItem *item = static_cast<CCMenuItem*>(pSender);
+    CCAssert(item != NULL, "pSender cannot but NULL");
+    item->setIsEnabled(false);
+    
+    // create action to delay for a short amount of time, then crash the program
+    CCDelayTime *delay = CCDelayTime::actionWithDuration(5.0f);
+    CCCallFunc *crash = CCCallFunc::actionWithTarget(this, callfunc_selector(HelloWorld::makeItCrash));
+    CCSequence *action = CCSequence::actionOneTwo(delay, crash);
+    this->runAction(action);
+}
+
+void HelloWorld::makeItCrash()
+{
+    // just create a NULL object and call any function to make it crash
+    CCObject *obj = NULL;
+    obj->retain();
 }

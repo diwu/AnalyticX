@@ -14,6 +14,11 @@ public:
     
     // a selector callback
     virtual void menuCloseCallback(CCObject* pSender);
+    
+    // add action to begin crashing the app
+    void beginProcessToCrashApp(CCObject* pSender);
+    // actually crash the app
+    void makeItCrash();
 
     // implement the "static node()" method manually
     LAYER_NODE_FUNC(HelloWorld);

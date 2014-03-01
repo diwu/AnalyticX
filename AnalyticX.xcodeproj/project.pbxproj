@@ -178,7 +178,8 @@
 		10C15EF9155BADA900C83B73 /* HelloWorldScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10C15EF8155BADA900C83B73 /* HelloWorldScene.cpp */; };
 		10C15F12155BC1D200C83B73 /* AnalyticX.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10C15F11155BC1D200C83B73 /* AnalyticX.mm */; };
 		10C15F14155BCF7E00C83B73 /* AnalyticXStringUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10C15F13155BCF7E00C83B73 /* AnalyticXStringUtil.mm */; };
-		6AA7C4AE16C81833008F02E5 /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AA7C4AC16C817FA008F02E5 /* libFlurry.a */; };
+		1E067BFD18BCA2E3005DD42D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E067BFC18BCA2E3005DD42D /* Security.framework */; };
+		1E067BFE18BCA412005DD42D /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AA7C4AC16C817FA008F02E5 /* libFlurry.a */; };
 		6AA7C4B216C81878008F02E5 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AA7C4B116C81878008F02E5 /* SystemConfiguration.framework */; };
 /* End PBXBuildFile section */
 
@@ -549,6 +550,7 @@
 		10C15F11155BC1D200C83B73 /* AnalyticX.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AnalyticX.mm; path = ios/AnalyticX.mm; sourceTree = "<group>"; };
 		10C15F13155BCF7E00C83B73 /* AnalyticXStringUtil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AnalyticXStringUtil.mm; path = ios/AnalyticXStringUtil.mm; sourceTree = "<group>"; };
 		10C15F15155BCF9E00C83B73 /* AnalyticXStringUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnalyticXStringUtil.h; path = ios/AnalyticXStringUtil.h; sourceTree = "<group>"; };
+		1E067BFC18BCA2E3005DD42D /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		6AA7C4AB16C817FA008F02E5 /* Flurry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Flurry.h; path = ios/Flurry.h; sourceTree = "<group>"; };
 		6AA7C4AC16C817FA008F02E5 /* libFlurry.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFlurry.a; path = ios/libFlurry.a; sourceTree = "<group>"; };
 		6AA7C4B116C81878008F02E5 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -560,6 +562,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6AA7C4B216C81878008F02E5 /* SystemConfiguration.framework in Frameworks */,
+				1E067BFD18BCA2E3005DD42D /* Security.framework in Frameworks */,
 				10C15CBA155BADA600C83B73 /* QuartzCore.framework in Frameworks */,
 				10C15CBC155BADA600C83B73 /* OpenGLES.framework in Frameworks */,
 				10C15CBE155BADA600C83B73 /* OpenAL.framework in Frameworks */,
@@ -568,7 +571,7 @@
 				10C15CC4155BADA600C83B73 /* UIKit.framework in Frameworks */,
 				10C15CC6155BADA600C83B73 /* Foundation.framework in Frameworks */,
 				10C15CC8155BADA600C83B73 /* CoreGraphics.framework in Frameworks */,
-				6AA7C4AE16C81833008F02E5 /* libFlurry.a in Frameworks */,
+				1E067BFE18BCA412005DD42D /* libFlurry.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -596,6 +599,7 @@
 		10C15CB8155BADA600C83B73 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1E067BFC18BCA2E3005DD42D /* Security.framework */,
 				10C15CB9155BADA600C83B73 /* QuartzCore.framework */,
 				10C15CBB155BADA600C83B73 /* OpenGLES.framework */,
 				10C15CBD155BADA600C83B73 /* OpenAL.framework */,
@@ -1635,7 +1639,9 @@
 				INFOPLIST_FILE = AnalyticX/Resources/Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/AnalyticX/ios\"",
+					"\\\"$(SRCROOT)/AnalyticX/ios\\\"",
+					"/Users/haxpor/Desktop/Flurry\\ iPhone\\ SDK\\ viPhone\\ 4.3.2/Flurry-iOS-4.3.2/Flurry",
+					/Users/haxpor/Data/_libs/AnalyticX/AnalyticX/ios,
 				);
 				OTHER_LDFLAGS = (
 					"-lxml2",
@@ -1657,7 +1663,9 @@
 				INFOPLIST_FILE = AnalyticX/Resources/Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/AnalyticX/ios\"",
+					"\\\"$(SRCROOT)/AnalyticX/ios\\\"",
+					"/Users/haxpor/Desktop/Flurry\\ iPhone\\ SDK\\ viPhone\\ 4.3.2/Flurry-iOS-4.3.2/Flurry",
+					/Users/haxpor/Data/_libs/AnalyticX/AnalyticX/ios,
 				);
 				OTHER_LDFLAGS = (
 					"-lxml2",
