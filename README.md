@@ -1,6 +1,6 @@
 ![Flurry Icon](http://pic.yupoo.com/diwup_v/BY5uWwj1/c1igU.png) ![-X Icon](http://pic.yupoo.com/diwup_v/BY5waKBY/MC5wD.png)
 
-#AnalyticX
+#AnalyticX - With the latest 5.4.0 Flurry lib!!!
 A C++ wrapper of [Flurry](http://www.flurry.com/) for [Cocos2d-X](https://github.com/cocos2d/cocos2d-x). Supports Android and iOS.
 
 #Changelog
