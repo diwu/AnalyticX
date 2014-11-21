@@ -110,3 +110,4 @@ When running on an iOS device, these APIs will have no effect. They are safe and
 * Di Wu
 * Anton Turko
 * François Dupayrat
+* Wasin Thonkaew
