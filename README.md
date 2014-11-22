@@ -12,7 +12,7 @@ A C++ wrapper of [Flurry](http://www.flurry.com/) for [Cocos2d-X](https://github
 
 #Flurry SDK Version
 1. Android: v2.2.5
-2. iOS: v3.0.9
+2. iOS: v5.4.0
 
 #Example Project
 1. iOS: ./AnalyticX.xcodeproj
@@ -24,6 +24,7 @@ A C++ wrapper of [Flurry](http://www.flurry.com/) for [Cocos2d-X](https://github
 1. Add ***FlurryAnalytics.h*** and ***libFlurryAnalytics.a*** to your Xcode project
 2. Add ***AnalyticX.h*** and ***AnalyticX.mm*** to your Xcode project
 3. Add ***AnalyticXStringUtil.h*** and ***AnalyticXStringUtil.mm*** to your Xcode project
+4. Add ***AnalyticXMacros.h*** to your XCode project
 
 #Add to Your Own Project - Android
 1. Add ***com.diwublog.AnalyticX*** the package and its ***AnalyticXBridge.java*** to your Eclipse project
@@ -31,17 +32,18 @@ A C++ wrapper of [Flurry](http://www.flurry.com/) for [Cocos2d-X](https://github
 3. Drop ***AnalyticX.h*** and ***AnalyticX.cpp*** to your ***Classes*** folder
 4. Drop ***AnalyticXStringUtilAndroid*** and ***AnalyticXStringUtilAndroid.cpp*** to your ***Classes*** folder
 5. Add ***AnalyticX.cpp*** and ***AnalyticXStringUtilAndroid.cpp*** to your jni's ***Android.mk***
-6. In the java implementation of your main activity (which should have been created by the Cocos2d-X script), import ***com.diwublog.AnalyticX.AnalyticXBridge***
-7. At the beginning of ***onCreate(Bundle savedInstanceState)***, right after ***super.onCreate(savedInstanceState)***, add one line:
+6. Add ***AnalyticXMacros.h*** to your XCode project 
+7. In the java implementation of your main activity (which should have been created by the Cocos2d-X script), import ***com.diwublog.AnalyticX.AnalyticXBridge***
+8. At the beginning of ***onCreate(Bundle savedInstanceState)***, right after ***super.onCreate(savedInstanceState)***, add one line:
 
 		AnalyticXBridge.sessionContext = this.getApplicationContext();
-8. In the project manifest, add one line:
+9. In the project manifest, add one line:
 
     	<uses-permission android:name="android.permission.INTERNET"></uses-permission>
 
 #Add to Your Own Project - Hybrid
 1. Follow the iOS and Android set up steps separately
-2. iOS and Android will share the same ***AnalyticX.h*** header file
+2. iOS and Android will share the same ***AnalyticX.h*** and ***AnalyticXMacros.h*** header file
 3. Use Separate Flurry Api Keys for Android and iOS
 		
 		#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
@@ -67,6 +69,25 @@ A C++ wrapper of [Flurry](http://www.flurry.com/) for [Cocos2d-X](https://github
 5. After that, before any call to exit(0), add this code :		
 		
     	AnalyticX::flurryEndSession();
+
+#Best Practice Using Analytic Service or Any Third Party Framework#
+1. Define FLURRY at the top of source code, or the source code that starts first before other
+
+        #define FLURRY
+2. Or, you can define FLURRY as per project-based. For XCode, go to Build Setting->Apple LLVM 6.0 - Preprocessing, then add "FLURRY" with not double quotation to target build.
+3. In code, wrap the flurry related calls with
+
+        #ifdef FLURRY
+            ...
+            AnalyticX::flurryLogEvent("event_3");
+            AnalyticX::flurryLogEventTimed(" log event timed test...", false);
+            ...
+        #endif
+4. But if using macros in AnalyticXMacros.h, there's no need to wrap the code like in no.3. Just directly call like following.
+
+        FLURRYLogEvent("event_logging_via_macro");
+        FLURRYLogEvent("event_logging_via_macro dummy-num: %d - %d", 1, 2);
+
 
 #APIs Supported on both Android and iOS
     static void flurrySetAppVersion(const char * version);

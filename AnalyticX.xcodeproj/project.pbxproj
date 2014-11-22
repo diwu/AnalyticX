@@ -553,6 +553,7 @@
 		1E067BFC18BCA2E3005DD42D /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		1E6975571A1F821D001BA312 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
 		1E6975581A1F821D001BA312 /* libFlurry.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry.a; sourceTree = "<group>"; };
+		1EF5A3851A20961600D9DFAF /* AnalyticXMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AnalyticXMacros.h; path = ios/AnalyticXMacros.h; sourceTree = "<group>"; };
 		6AA7C4B116C81878008F02E5 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -1330,6 +1331,7 @@
 				10C15F11155BC1D200C83B73 /* AnalyticX.mm */,
 				10C15F13155BCF7E00C83B73 /* AnalyticXStringUtil.mm */,
 				10C15F15155BCF9E00C83B73 /* AnalyticXStringUtil.h */,
+				1EF5A3851A20961600D9DFAF /* AnalyticXMacros.h */,
 			);
 			name = ios;
 			sourceTree = "<group>";
@@ -1635,6 +1637,13 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AnalyticX/Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					DEBUG,
+					"COCOS2D_DEBUG=1",
+					USE_FILE32API,
+					TARGET_OS_IPHONE,
+					FLURRY,
+				);
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = AnalyticX/Resources/Info.plist;
 				LIBRARY_SEARCH_PATHS = (
@@ -1658,6 +1667,12 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AnalyticX/Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					NDEBUG,
+					USE_FILE32API,
+					TARGET_OS_IPHONE,
+					FLURRY,
+				);
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = AnalyticX/Resources/Info.plist;
 				LIBRARY_SEARCH_PATHS = (
