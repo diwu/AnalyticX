@@ -63,7 +63,7 @@ public:
     + (void)logError:(NSString *)errorID message:(NSString *)message error:(NSError *)error;
      */
     //iOS + Android
-    static void flurryLogEvent(const char * eventName);
+    static void flurryLogEvent(const char * eventName, ...);
     //iOS + Android
     static void flurryLogEventWithParameters(const char * eventName, cocos2d::CCDictionary * parameters);
 

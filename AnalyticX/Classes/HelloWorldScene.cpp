@@ -1,6 +1,16 @@
 #include "HelloWorldScene.h"
 #include "SimpleAudioEngine.h"
+
+// Uncomment the following line to define FLURRY, or define it as per project-based (see Build Setting->Apple LLVM 6.0 - Preprocessing in XCode)
+//#define FLURRY
+
+#ifdef FLURRY
 #include "AnalyticX.h"
+#endif
+
+// always include this even FLURRY is not defined as it provides shorter code, and more flexible to log event with Flurry
+// note: it makes no harm even FLURRY is not defined to include this header
+#include "AnalyticXMacros.h"
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 #include <jni.h>
@@ -83,15 +93,16 @@ bool HelloWorld::init()
     // add the sprite as a child to this layer
     this->addChild(pSprite, 0);
     
+#ifdef FLURRY
     AnalyticX::flurrySetAppVersion("v_1_97");
     cocos2d::CCLog("--->>>get flurry version = %s", AnalyticX::flurryGetFlurryAgentVersion());
-    AnalyticX::flurrySetDebugLogEnabled(false);
+    AnalyticX::flurrySetDebugLogEnabled(true);
     AnalyticX::flurrySetSessionContinueSeconds(143);
     AnalyticX::flurrySetSecureTransportEnabled(false);
     AnalyticX::flurrySetCrashReportingEnabled(true);
     
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    AnalyticX::flurryStartSession("QFNXVFK2XX4P56GS76EA");
+    AnalyticX::flurryStartSession("S5K5JGB8HB4J2ZBBWZ4D");
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
     AnalyticX::flurryStartSession("W7IBK43RJCHPT4IRP4HI");
@@ -139,7 +150,19 @@ bool HelloWorld::init()
     
     AnalyticX::flurryLogPageView();
     
+#endif
+    
+    // test log event via macro
+    const char* tempString = "Hello World";
+    
+    FLURRYLogEvent("event_logging_via_macro");
+    FLURRYLogEvent("event_logging_via_macro_2, dummy-num: %d - %d", 1, 2);
+    FLURRYLogEvent("event_logging_via_macro_3, dummy-str: %s", tempString);
+
+#ifdef FLURRY
     //AnalyticX::flurryEndSession();
+#endif
+
     
     return true;
 }

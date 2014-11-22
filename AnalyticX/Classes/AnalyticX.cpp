@@ -16,7 +16,15 @@
 
 using namespace std;
 
-void AnalyticX::flurryLogEvent(const char * eventName) {
+void AnalyticX::flurryLogEvent(const char * eventName, ...) {
+    
+    // take the size directly from cocos2d's cocos2d::kMaxLogLen
+    char szBuf[16*1024];
+    
+    va_list ap;
+    va_start(ap, eventName);
+    vsprintf(szBuf, eventName, ap);
+    va_end(ap);
     
     cocos2d::JniMethodInfo minfo;
     
@@ -26,7 +34,7 @@ void AnalyticX::flurryLogEvent(const char * eventName) {
         //do nothing
     } else {
         jstring stringArg0 = minfo.env->NewStringUTF("flurryLogEvent");
-        jstring stringArg1 = minfo.env->NewStringUTF(eventName);
+        jstring stringArg1 = minfo.env->NewStringUTF(szBuf);
         jstring stringArg2 = minfo.env->NewStringUTF("false");
 
         minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, stringArg0, stringArg1, stringArg2);

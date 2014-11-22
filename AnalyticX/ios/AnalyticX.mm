@@ -48,8 +48,15 @@ void AnalyticX::flurryEndSession() {
     //Android only
 }
 
-void AnalyticX::flurryLogEvent(const char * eventName) {
-    [Flurry logEvent:[AnalyticXStringUtil nsstringFromCString:eventName]];
+void AnalyticX::flurryLogEvent(const char * eventName, ...) {
+    char szBuf[cocos2d::kMaxLogLen];
+    
+    va_list ap;
+    va_start(ap, eventName);
+    vsprintf(szBuf, eventName, ap);
+    va_end(ap);
+    
+    [Flurry logEvent:[AnalyticXStringUtil nsstringFromCString:szBuf]];
 }
 
 void AnalyticX::flurryLogEventWithParameters(const char * eventName, cocos2d::CCDictionary * parameters) {
