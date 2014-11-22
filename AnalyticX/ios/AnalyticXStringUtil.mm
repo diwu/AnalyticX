@@ -38,14 +38,14 @@
         return NULL;
     }
     
-    cocos2d::CCLog("1");
+    CCLOG("1");
     
     NSMutableDictionary *nsDict = [NSMutableDictionary dictionaryWithCapacity:ccDictionary->allKeys()->count()];
     
-    cocos2d::CCLog("2");
+    CCLOG("2");
 
     for (int i = 0; i < ccDictionary->allKeys()->count(); i++) {
-        cocos2d::CCLog("3");
+        CCLOG("3");
         
         cocos2d::CCObject* obj = ccDictionary->objectForKey(((cocos2d::CCString *)ccDictionary->allKeys()->objectAtIndex(i))->getCString());
         NSObject* nsObject;
