@@ -38,7 +38,7 @@ public:
     //iOS + Android. The param is in second. Will be converted to millisecond internally.
     static void flurrySetSessionContinueSeconds(int seconds);
     //iOS + Android
-    static void flurrySetSecureTransportEnabled(bool value);
+    CC_DEPRECATED_ATTRIBUTE static void flurrySetSecureTransportEnabled(bool value);
     //iOS + Android
     static void flurrySetCrashReportingEnabled(bool value);
     
@@ -65,7 +65,7 @@ public:
     //iOS + Android
     static void flurryLogEvent(const char * eventName, ...);
     //iOS + Android
-    static void flurryLogEventWithParameters(const char * eventName, cocos2d::CCDictionary * parameters);
+    static void flurryLogEventWithParameters(const char * eventName, cocos2d::__Dictionary * parameters);
 
     /* 
      start or end timed events
@@ -78,9 +78,9 @@ public:
     //iOS + Android
     static void flurryLogEventTimed(const char * eventName, bool timed);
     //iOS + Android
-    static void flurryLogEventWithParametersTimed(const char * eventName, cocos2d::CCDictionary * parameters, bool timed);
+    static void flurryLogEventWithParametersTimed(const char * eventName, cocos2d::__Dictionary * parameters, bool timed);
     //iOS + Android. On Android, the *parameters* will be ignored
-    static void flurryEndTimedEventWithParameters(const char * eventName, cocos2d::CCDictionary * parameters); // non-nil parameters will update the parameters
+    static void flurryEndTimedEventWithParameters(const char * eventName, cocos2d::__Dictionary * parameters); // non-nil parameters will update the parameters
     
     /*
      count page views
