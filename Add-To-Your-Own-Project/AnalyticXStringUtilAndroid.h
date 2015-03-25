@@ -14,9 +14,9 @@
 #include "platform/android/jni/JniHelper.h"
 
 class AnalyticXStringUtilAndroid {
-    
+
 public:
-    static jobjectArray jobjectArrayFromCCDictionary(cocos2d::JniMethodInfo minfo, cocos2d::CCDictionary * ccDictionary);
+    static jobjectArray jobjectArrayFromCCDictionary(cocos2d::JniMethodInfo minfo, cocos2d::__Dictionary * ccDictionary);
 };
 
 #endif

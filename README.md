@@ -1,14 +1,16 @@
 ![Flurry Icon](http://pic.yupoo.com/diwup_v/BY5uWwj1/c1igU.png) ![-X Icon](http://pic.yupoo.com/diwup_v/BY5waKBY/MC5wD.png)
 
-#AnalyticX - With the latest 5.4.0 Flurry lib!!!
+#AnalyticX - With the latest 6.2.0 Flurry lib!!!
 A C++ wrapper of [Flurry](http://www.flurry.com/) for [Cocos2d-X](https://github.com/cocos2d/cocos2d-x). Supports Android and iOS.
 
 #Changelog
+* Updated Flurry iOS SDK to version 6.4.0 and Flurry Android SDK to 5.3.0
+* Updated environment to be compatible with Cocos2dX-3.4
 * Added reflection to AnalyticXStringUtil
 * Updated Flurry iOS SDK to version 4.0.0
 
 #Environment
-***cocos2d-2.0-rc0a-x-0.1.0*** or higher is recommended. Lower versions are not tested. Due to the underlying difference in the ***CCDictionary*** implementation, there may be compatibility issues when running on lower versions.
+***cocos2dx-3.4*** or higher is recommended. Lower versions are not tested. Due to the underlying difference in the ***CCDictionary*** implementation, there may be compatibility issues when running on lower versions.
 
 #Flurry SDK Version
 1. Android: v2.2.5
@@ -28,11 +30,11 @@ A C++ wrapper of [Flurry](http://www.flurry.com/) for [Cocos2d-X](https://github
 
 #Add to Your Own Project - Android
 1. Add ***com.diwublog.AnalyticX*** the package and its ***AnalyticXBridge.java*** to your Eclipse project
-2. Add ***FlurryAgent.jar*** as an external jar to your Eclipse project
+2. Add ***FlurryAnalytics.jar*** as an external jar to your Eclipse project
 3. Drop ***AnalyticX.h*** and ***AnalyticX.cpp*** to your ***Classes*** folder
 4. Drop ***AnalyticXStringUtilAndroid*** and ***AnalyticXStringUtilAndroid.cpp*** to your ***Classes*** folder
 5. Add ***AnalyticX.cpp*** and ***AnalyticXStringUtilAndroid.cpp*** to your jni's ***Android.mk***
-6. Add ***AnalyticXMacros.h*** to your XCode project 
+6. Add ***AnalyticXMacros.h*** to your XCode project
 7. In the java implementation of your main activity (which should have been created by the Cocos2d-X script), import ***com.diwublog.AnalyticX.AnalyticXBridge***
 8. At the beginning of ***onCreate(Bundle savedInstanceState)***, right after ***super.onCreate(savedInstanceState)***, add one line:
 
@@ -45,16 +47,16 @@ A C++ wrapper of [Flurry](http://www.flurry.com/) for [Cocos2d-X](https://github
 1. Follow the iOS and Android set up steps separately
 2. iOS and Android will share the same ***AnalyticX.h*** and ***AnalyticXMacros.h*** header file
 3. Use Separate Flurry Api Keys for Android and iOS
-		
+
 		#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     		AnalyticX::flurryStartSession("YOUR_FLURRY_API_KEY_FOR_IPHONE_BUILD");
 		#endif
-		
+
 		#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
     		AnalyticX::flurryStartSession("YOUR_FLURRY_API_KEY_FOR_ANDROID_BUILD");
 		#endif
-4. For Android, you need to end the session when the app goes in the background or when you manually quit the application, else the events may not be recorded on Flurry website. First, add the calls in your AppDelegate.cpp :		
-		
+4. For Android, you need to end the session when the app goes in the background or when you manually quit the application, else the events may not be recorded on Flurry website. First, add the calls in your AppDelegate.cpp :
+
 		void AppDelegate::applicationDidEnterBackground()
 		{
     		AnalyticX::flurryEndSession();
@@ -66,8 +68,8 @@ A C++ wrapper of [Flurry](http://www.flurry.com/) for [Cocos2d-X](https://github
 	    	AnalyticX::flurryStartSession("YOUR_FLURRY_API_KEY_FOR_ANDROID_BUILD");
 			//Your code
 		}
-5. After that, before any call to exit(0), add this code :		
-		
+5. After that, before any call to exit(0), add this code :
+
     	AnalyticX::flurryEndSession();
 
 #Best Practice Using Analytic Service or Any Third Party Framework#
@@ -95,16 +97,16 @@ A C++ wrapper of [Flurry](http://www.flurry.com/) for [Cocos2d-X](https://github
     static void flurrySetDebugLogEnabled(bool value);
     static void flurrySetSessionContinueSeconds(int seconds);//The param is in second. Will be converted to millisecond internally.
     static void flurrySetSecureTransportEnabled(bool value);
-    
+
     static void flurryStartSession(const char * apiKey);
-    
+
     static void flurryLogEvent(const char * eventName);
     static void flurryLogEventWithParameters(const char * eventName, cocos2d::CCDictionary * parameters);
     static void flurryLogEventTimed(const char * eventName, bool timed);
     static void flurryLogEventWithParametersTimed(const char * eventName, cocos2d::CCDictionary * parameters, bool timed);
     static void flurryEndTimedEventWithParameters(const char * eventName, cocos2d::CCDictionary * parameters);
     static void flurryLogPageView();
-    
+
     static void flurrySetUserID(const char * userID);
     static void flurrySetAge(int age);
     static void flurrySetGender(const char * gender);//"m" for male, "f" for female

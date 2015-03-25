@@ -63,7 +63,7 @@ void AnalyticX::flurryLogEventTimed(const char * eventName, bool timed) {
     }
 }
 
-void AnalyticX::flurryLogEventWithParameters(const char * eventName, cocos2d::CCDictionary * parameters) {
+void AnalyticX::flurryLogEventWithParameters(const char * eventName, cocos2d::__Dictionary * parameters) {
     cocos2d::JniMethodInfo minfo;
 
     bool isHave = cocos2d::JniHelper::getStaticMethodInfo(minfo,"com/diwublog/AnalyticX/AnalyticXBridge","Bridge", "(Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;)V"); 
@@ -81,7 +81,7 @@ void AnalyticX::flurryLogEventWithParameters(const char * eventName, cocos2d::CC
     }
 }
 
-void AnalyticX::flurryLogEventWithParametersTimed(const char * eventName, cocos2d::CCDictionary * parameters, bool timed) {
+void AnalyticX::flurryLogEventWithParametersTimed(const char * eventName, cocos2d::__Dictionary * parameters, bool timed) {
     
     cocos2d::JniMethodInfo minfo;
     
@@ -106,7 +106,7 @@ void AnalyticX::flurryLogEventWithParametersTimed(const char * eventName, cocos2
 
 // Since Flurry for Android does not support *parameters* in *endTimedEvent()*.
 // This *parameters* will be ignored when running in Android
-void AnalyticX::flurryEndTimedEventWithParameters(const char * eventName, cocos2d::CCDictionary * parameters) {
+void AnalyticX::flurryEndTimedEventWithParameters(const char * eventName, cocos2d::__Dictionary * parameters) {
     
     cocos2d::JniMethodInfo minfo;
     
