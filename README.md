@@ -1,20 +1,18 @@
 ![Flurry Icon](http://pic.yupoo.com/diwup_v/BY5uWwj1/c1igU.png) ![-X Icon](http://pic.yupoo.com/diwup_v/BY5waKBY/MC5wD.png)
 
-#AnalyticX - With the latest 6.2.0 Flurry lib!!!
+#AnalyticX - With the latest 6.7.0 Flurry lib!!!
 A C++ wrapper of [Flurry](http://www.flurry.com/) for [Cocos2d-X](https://github.com/cocos2d/cocos2d-x). Supports Android and iOS.
 
 #Changelog
-* Updated Flurry iOS SDK to version 6.4.0 and Flurry Android SDK to 5.3.0
-* Updated environment to be compatible with Cocos2dX-3.4
+* Updated Flurry iOS SDK to version 6.7.0 and Flurry Android SDK to 5.3.0
 * Added reflection to AnalyticXStringUtil
-* Updated Flurry iOS SDK to version 4.0.0
 
 #Environment
-***cocos2dx-3.4*** or higher is recommended. Lower versions are not tested. Due to the underlying difference in the ***CCDictionary*** implementation, there may be compatibility issues when running on lower versions.
+***cocos2d-2.0-rc0a-x-0.1.0*** or higher is recommended. Lower versions are not tested. Due to the underlying difference in the ***CCDictionary*** implementation, there may be compatibility issues when running on lower versions.
 
 #Flurry SDK Version
-1. Android: v2.2.5
-2. iOS: v5.4.0
+1. Android: v5.3.0
+2. iOS: v6.7.0
 
 #Example Project
 1. iOS: ./AnalyticX.xcodeproj
@@ -22,13 +20,13 @@ A C++ wrapper of [Flurry](http://www.flurry.com/) for [Cocos2d-X](https://github
 
 ***You need to change the build script (such as build_native.sh for Mac OSX) according to your own environment before compiling***.
 
-#Add to Your Own Project - iOS
+#Add to Your Own Project - iOS (in `Add-To-Your-Own-Project` folder)
 1. Add ***FlurryAnalytics.h*** and ***libFlurryAnalytics.a*** to your Xcode project
 2. Add ***AnalyticX.h*** and ***AnalyticX.mm*** to your Xcode project
 3. Add ***AnalyticXStringUtil.h*** and ***AnalyticXStringUtil.mm*** to your Xcode project
 4. Add ***AnalyticXMacros.h*** to your XCode project
 
-#Add to Your Own Project - Android
+#Add to Your Own Project - Android (in `Add-To-Yout-Own-Project` folder)
 1. Add ***com.diwublog.AnalyticX*** the package and its ***AnalyticXBridge.java*** to your Eclipse project
 2. Add ***FlurryAnalytics.jar*** as an external jar to your Eclipse project
 3. Drop ***AnalyticX.h*** and ***AnalyticX.cpp*** to your ***Classes*** folder
@@ -96,14 +94,13 @@ A C++ wrapper of [Flurry](http://www.flurry.com/) for [Cocos2d-X](https://github
     static const char * flurryGetFlurryAgentVersion();
     static void flurrySetDebugLogEnabled(bool value);
     static void flurrySetSessionContinueSeconds(int seconds);//The param is in second. Will be converted to millisecond internally.
-    static void flurrySetSecureTransportEnabled(bool value);
 
     static void flurryStartSession(const char * apiKey);
 
-    static void flurryLogEvent(const char * eventName);
-    static void flurryLogEventWithParameters(const char * eventName, cocos2d::CCDictionary * parameters);
-    static void flurryLogEventTimed(const char * eventName, bool timed);
-    static void flurryLogEventWithParametersTimed(const char * eventName, cocos2d::CCDictionary * parameters, bool timed);
+    static AXFlurryEventRecordStatus flurryLogEvent(const char * eventName);
+    static AXFlurryEventRecordStatus flurryLogEventWithParameters(const char * eventName, cocos2d::CCDictionary * parameters);
+    static AXFlurryEventRecordStatus flurryLogEventTimed(const char * eventName, bool timed);
+    static AXFlurryEventRecordStatus flurryLogEventWithParametersTimed(const char * eventName, cocos2d::CCDictionary * parameters, bool timed);
     static void flurryEndTimedEventWithParameters(const char * eventName, cocos2d::CCDictionary * parameters);
     static void flurryLogPageView();
 
@@ -125,6 +122,11 @@ When running on an iOS device, these APIs will have no effect. They are safe and
 
     static void flurryEndSession();
     static void flurrySetReportLocation(bool reportLocation);
+
+#Note
+* Add-To-Your-Own-Project contains files necessary to copy to your own project. All of files required for Xcode project are there. But for Android, there're the package folder, a bridge file, and .jar file that you need to look into Android project folder and copy them yourself. They're left there for a reason.
+* copyResults.sh is a shell script to copy files to Add-To-Your-Own-Project folder automatically after the project is successfully built. This is meant to prevent mistake if developers do manual copy. It is included as Run Script phase inside XCode project.
+
 
 #Email: <diwufet@gmail.com>
 #You're welcome to contribute. ;-)

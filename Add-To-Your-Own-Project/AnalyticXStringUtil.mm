@@ -18,12 +18,9 @@
         return NULL;
     }
     
-    NSString * nsstring = [[NSString alloc] initWithBytes:cstring
-                                                   length:strlen(cstring)
-                                                 encoding:NSUTF8StringEncoding];
+    NSString * nsstring = [[NSString alloc] initWithBytes:cstring length:strlen(cstring) encoding:NSUTF8StringEncoding];
     return [nsstring autorelease];
 }
-
 + (const char *)cstringFromNSString:(NSString *)nsstring {
     
     if (nsstring == NULL) {
@@ -32,8 +29,7 @@
     
     return [nsstring UTF8String];
 }
-
-+ (NSDictionary *)nsDictionaryFromCCDictionary:(cocos2d::__Dictionary *)ccDictionary {
++ (NSDictionary *)nsDictionaryFromCCDictionary:(cocos2d::CCDictionary *)ccDictionary {
     if (ccDictionary == NULL) {
         return NULL;
     } else if (ccDictionary->allKeys() == NULL) {
@@ -41,44 +37,44 @@
     } else if (ccDictionary->allKeys()->count() <= 0) {
         return NULL;
     }
-
+    
+    CCLOG("1");
+    
     NSMutableDictionary *nsDict = [NSMutableDictionary dictionaryWithCapacity:ccDictionary->allKeys()->count()];
+    
+    CCLOG("2");
+
     for (int i = 0; i < ccDictionary->allKeys()->count(); i++) {
-        cocos2d::Ref* obj = ccDictionary
-                                ->objectForKey(((cocos2d::__String *)ccDictionary
-                                                                        ->allKeys()
-                                                                        ->getObjectAtIndex(i))
-                                                                        ->getCString());
+        CCLOG("3");
+        
+        cocos2d::CCObject* obj = ccDictionary->objectForKey(((cocos2d::CCString *)ccDictionary->allKeys()->objectAtIndex(i))->getCString());
         NSObject* nsObject;
-        if(isKindOfClass(obj, cocos2d::__Dictionary))
+        if(isKindOfClass(obj, cocos2d::CCDictionary))
         {
             nsObject = @"Dictionary";
         }
-        else if(isKindOfClass(obj, cocos2d::__Array))
+        else if(isKindOfClass(obj, cocos2d::CCArray))
         {
             nsObject = @"Array";
         }
-        else if (isKindOfClass(obj, cocos2d::__String))
+        else if (isKindOfClass(obj, cocos2d::CCString))
         {
-            const char* cstring = ((cocos2d::__String*)obj)->getCString();
-            nsObject = [[[NSString alloc] initWithBytes:cstring
-                                                 length:strlen(cstring)
-                                               encoding:NSUTF8StringEncoding] autorelease];
+            const char* cstring = ((cocos2d::CCString*)obj)->getCString();
+            nsObject = [[[NSString alloc] initWithBytes:cstring length:strlen(cstring) encoding:NSUTF8StringEncoding] autorelease];
         }
-        else if (isKindOfClass(obj, cocos2d::__Integer))
+        else if (isKindOfClass(obj, cocos2d::CCInteger))
         {
-            nsObject = [NSString stringWithFormat:@"%d", ((cocos2d::__Integer*)obj)->getValue()];
+            nsObject = [NSString stringWithFormat:@"%d", ((cocos2d::CCInteger*)obj)->getValue()];
         }
         else
         {
             nsObject = @"Unknown Object";
         }
-        [nsDict setValue:nsObject forKey:
-            [AnalyticXStringUtil nsstringFromCString:
-                ((cocos2d::__String *)ccDictionary->allKeys()->getObjectAtIndex(i))->getCString()]];
+        [nsDict setValue:nsObject forKey:[AnalyticXStringUtil nsstringFromCString:((cocos2d::CCString *)ccDictionary->allKeys()->objectAtIndex(i))->getCString()]];
     }
     
     return nsDict;
 }
+
 
 @end

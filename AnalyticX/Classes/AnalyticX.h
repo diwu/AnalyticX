@@ -10,6 +10,21 @@
 #define AnalyticX_AnalyticX_h
 
 #include "cocos2d.h"
+#include "AnalyticXMacros.h"
+
+/*
+    Mirrorred enum of FlurryEventRecordStatus defined in Flurry.h.
+    The order and value are the same.
+    Defined here as Flurry.h is based on Objective-C code, but we need it to be compatible with C/C++ code.
+*/
+typedef enum {
+    AXFlurryEventFailed = 0,
+    AXFlurryEventRecorded,
+    AXFlurryEventUniqueCountExceeded,
+    AXFlurryEventParamsCountExceeded,
+    AXFlurryEventLogCountExceeded,
+    AXFlurryEventLoggingDelayed
+} AXFlurryEventRecordStatus;
 
 class AnalyticX {
     
@@ -38,8 +53,6 @@ public:
     //iOS + Android. The param is in second. Will be converted to millisecond internally.
     static void flurrySetSessionContinueSeconds(int seconds);
     //iOS + Android
-    static void flurrySetSecureTransportEnabled(bool value);
-    //iOS + Android
     static void flurrySetCrashReportingEnabled(bool value);
     
     /*
@@ -57,28 +70,28 @@ public:
      log events or errors after session has started
      */
     /*
-    + (void)logEvent:(NSString *)eventName;
-    + (void)logEvent:(NSString *)eventName withParameters:(NSDictionary *)parameters;
+    + (FlurryEventRecordStatus)logEvent:(NSString *)eventName;
+    + (FlurryEventRecordStatus)logEvent:(NSString *)eventName withParameters:(NSDictionary *)parameters;
     + (void)logError:(NSString *)errorID message:(NSString *)message exception:(NSException *)exception;
     + (void)logError:(NSString *)errorID message:(NSString *)message error:(NSError *)error;
      */
     //iOS + Android
-    static void flurryLogEvent(const char * eventName, ...);
+    static AXFlurryEventRecordStatus flurryLogEvent(const char * eventName, ...);
     //iOS + Android
-    static void flurryLogEventWithParameters(const char * eventName, cocos2d::CCDictionary * parameters);
+    static AXFlurryEventRecordStatus flurryLogEventWithParameters(const char * eventName, cocos2d::CCDictionary * parameters);
 
     /* 
      start or end timed events
      */
     /*
-    + (void)logEvent:(NSString *)eventName timed:(BOOL)timed;
-    + (void)logEvent:(NSString *)eventName withParameters:(NSDictionary *)parameters timed:(BOOL)timed;
+    + (FlurryEventRecordStatus)logEvent:(NSString *)eventName timed:(BOOL)timed;
+    + (FlurryEventRecordStatus)logEvent:(NSString *)eventName withParameters:(NSDictionary *)parameters timed:(BOOL)timed;
     + (void)endTimedEvent:(NSString *)eventName withParameters:(NSDictionary *)parameters;	// non-nil parameters will update the parameters
      */
     //iOS + Android
-    static void flurryLogEventTimed(const char * eventName, bool timed);
+    static AXFlurryEventRecordStatus flurryLogEventTimed(const char * eventName, bool timed);
     //iOS + Android
-    static void flurryLogEventWithParametersTimed(const char * eventName, cocos2d::CCDictionary * parameters, bool timed);
+    static AXFlurryEventRecordStatus flurryLogEventWithParametersTimed(const char * eventName, cocos2d::CCDictionary * parameters, bool timed);
     //iOS + Android. On Android, the *parameters* will be ignored
     static void flurryEndTimedEventWithParameters(const char * eventName, cocos2d::CCDictionary * parameters); // non-nil parameters will update the parameters
     

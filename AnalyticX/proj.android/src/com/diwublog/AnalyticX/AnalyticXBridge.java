@@ -57,12 +57,12 @@ public class AnalyticXBridge {
 		}
 	}
 	
-	static private void flurryLogEvent(String eventID) {
+	static private AXFlurryEventRecordStatus flurryLogEvent(String eventID) {
 		Log.v("diwu", "flurryLogEvent() is called... eventID = " + eventID);
-		FlurryAgent.logEvent(eventID);
+		return FlurryAgent.logEvent(eventID);
 	}
 	
-	static private void flurryLogEventTimed(String eventID, String timed) {
+	static private AXFlurryEventRecordStatus flurryLogEventTimed(String eventID, String timed) {
 		boolean timedBool = false;
 		if (timed.equalsIgnoreCase("false")) {
 			timedBool = false;
@@ -70,11 +70,10 @@ public class AnalyticXBridge {
 			timedBool = true;
 		}
 		Log.v("diwu", "flurryLogEventTimed(), eventID = " + eventID + ", timed = " + timedBool);
-		FlurryAgent.logEvent(eventID, timedBool);
-		
+		return FlurryAgent.logEvent(eventID, timedBool);
 	}
 	
-	static private void flurryLogEventWithParameters(String eventID, String [] parametersArray) {
+	static private AXFlurryEventRecordStatus flurryLogEventWithParameters(String eventID, String [] parametersArray) {
 		Log.v("diwu", "flurryLogEventWithParameters... event id = " + eventID);
 
 		HashMap<String, String> someMap = new HashMap<String, String>();
@@ -85,10 +84,10 @@ public class AnalyticXBridge {
 			someMap.put(parametersArray[2*i], parametersArray[2*i+1]);
 		}
 		
-		FlurryAgent.logEvent(eventID, someMap);
+		return FlurryAgent.logEvent(eventID, someMap);
 	}
 	
-	static private void flurryLogEventWithParametersTimed(String eventID, String [] parametersArray, String timed) {
+	static private AXFlurryEventRecordStatus flurryLogEventWithParametersTimed(String eventID, String [] parametersArray, String timed) {
 
 		HashMap<String, String> someMap = new HashMap<String, String>();
 
@@ -105,7 +104,7 @@ public class AnalyticXBridge {
 		
 		Log.v("diwu", "flurryLogEventWithParametersTimed... event id = " + eventID + " timed = " + timedBool);
 
-		FlurryAgent.logEvent(eventID, someMap, timedBool);
+		return FlurryAgent.logEvent(eventID, someMap, timedBool);
 	}
 	
 	static private void flurryEndTimedEvent(String eventID) {
