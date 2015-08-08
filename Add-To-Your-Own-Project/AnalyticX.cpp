@@ -16,7 +16,7 @@
 
 using namespace std;
 
-void AnalyticX::flurryLogEvent(const char * eventName, ...) {
+AXFlurryEventRecordStatus AnalyticX::flurryLogEvent(const char * eventName, ...) {
     
     // take the size directly from cocos2d's cocos2d::kMaxLogLen
     char szBuf[16*1024];
@@ -31,17 +31,20 @@ void AnalyticX::flurryLogEvent(const char * eventName, ...) {
     bool isHave = cocos2d::JniHelper::getStaticMethodInfo(minfo,"com/diwublog/AnalyticX/AnalyticXBridge","Bridge", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V"); 
     
     if (!isHave) {
-        //do nothing
+        // decided to use AXFlurryEventFailed as part of this error return value
+        // for better specific to the error, throwing exception would be a better idea
+        // but decided to return the same enum as of Flurry to make it simple and consistent with iOS as it has no jni's error to be reported
+        return AXFlurryEventFailed;
     } else {
         jstring stringArg0 = minfo.env->NewStringUTF("flurryLogEvent");
         jstring stringArg1 = minfo.env->NewStringUTF(szBuf);
         jstring stringArg2 = minfo.env->NewStringUTF("false");
 
-        minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, stringArg0, stringArg1, stringArg2);
+        return (AXFlurryEventRecordStatus)minfo.env->CallStaticIntMethod(minfo.classID, minfo.methodID, stringArg0, stringArg1, stringArg2);
     }
 }
 
-void AnalyticX::flurryLogEventTimed(const char * eventName, bool timed) {
+AXFlurryEventRecordStatus AnalyticX::flurryLogEventTimed(const char * eventName, bool timed) {
     
     cocos2d::JniMethodInfo minfo;
     
@@ -49,6 +52,7 @@ void AnalyticX::flurryLogEventTimed(const char * eventName, bool timed) {
     
     if (!isHave) {
         //do nothing
+        return AXFlurryEventFailed;
     } else {
         jstring stringArg0 = minfo.env->NewStringUTF("flurryLogEventTimed");
         jstring stringArg1 = minfo.env->NewStringUTF(eventName);
@@ -59,29 +63,29 @@ void AnalyticX::flurryLogEventTimed(const char * eventName, bool timed) {
 
         }
         
-        minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, stringArg0, stringArg1, stringArg2);
+        return (AXFlurryEventRecordStatus)minfo.env->CallStaticIntMethod(minfo.classID, minfo.methodID, stringArg0, stringArg1, stringArg2);
     }
 }
 
-void AnalyticX::flurryLogEventWithParameters(const char * eventName, cocos2d::__Dictionary * parameters) {
+AXFlurryEventRecordStatus AnalyticX::flurryLogEventWithParameters(const char * eventName, cocos2d::CCDictionary * parameters) {
     cocos2d::JniMethodInfo minfo;
 
     bool isHave = cocos2d::JniHelper::getStaticMethodInfo(minfo,"com/diwublog/AnalyticX/AnalyticXBridge","Bridge", "(Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;)V"); 
 
     if (!isHave) {
         //do nothing
+        return AXFlurryEventFailed;
     } else {
         string eventNameString("flurryLogEventWithParameters,");
         eventNameString += eventName;
 		jstring stringArg0 = minfo.env->NewStringUTF(eventNameString.c_str());
         jstring stringArg2 = minfo.env->NewStringUTF("false");
 
-        minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, stringArg0, AnalyticXStringUtilAndroid::jobjectArrayFromCCDictionary(minfo, parameters), stringArg2);
-
+        return (AXFlurryEventRecordStatus)minfo.env->CallStaticIntMethod(minfo.classID, minfo.methodID, stringArg0, AnalyticXStringUtilAndroid::jobjectArrayFromCCDictionary(minfo, parameters), stringArg2);
     }
 }
 
-void AnalyticX::flurryLogEventWithParametersTimed(const char * eventName, cocos2d::__Dictionary * parameters, bool timed) {
+AXFlurryEventRecordStatus AnalyticX::flurryLogEventWithParametersTimed(const char * eventName, cocos2d::CCDictionary * parameters, bool timed) {
     
     cocos2d::JniMethodInfo minfo;
     
@@ -89,6 +93,7 @@ void AnalyticX::flurryLogEventWithParametersTimed(const char * eventName, cocos2
     
     if (!isHave) {
         //do nothing
+        return AXFlurryEventFailed;
     } else {
         string eventNameString("flurryLogEventWithParametersTimed,");
         eventNameString += eventName;
@@ -99,14 +104,13 @@ void AnalyticX::flurryLogEventWithParametersTimed(const char * eventName, cocos2
             stringArg2 = minfo.env->NewStringUTF("true");
         }
         
-        minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, stringArg0, AnalyticXStringUtilAndroid::jobjectArrayFromCCDictionary(minfo, parameters), stringArg2);
-        
+        return (AXFlurryEventRecordStatus)minfo.env->CallStaticIntMethod(minfo.classID, minfo.methodID, stringArg0, AnalyticXStringUtilAndroid::jobjectArrayFromCCDictionary(minfo, parameters), stringArg2);
     }
 }
 
 // Since Flurry for Android does not support *parameters* in *endTimedEvent()*.
 // This *parameters* will be ignored when running in Android
-void AnalyticX::flurryEndTimedEventWithParameters(const char * eventName, cocos2d::__Dictionary * parameters) {
+void AnalyticX::flurryEndTimedEventWithParameters(const char * eventName, cocos2d::CCDictionary * parameters) {
     
     cocos2d::JniMethodInfo minfo;
     
@@ -209,26 +213,6 @@ void AnalyticX::flurrySetSessionContinueSeconds(int seconds) {
         //do nothing
     } else {        
         minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, (jint)seconds);
-    }
-}
-
-void AnalyticX::flurrySetSecureTransportEnabled(bool value) {
-    cocos2d::JniMethodInfo minfo;
-    
-    bool isHave = cocos2d::JniHelper::getStaticMethodInfo(minfo,"com/diwublog/AnalyticX/AnalyticXBridge","Bridge", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V"); 
-    
-    if (!isHave) {
-        //do nothing
-    } else {
-        jstring stringArg0 = minfo.env->NewStringUTF("flurrySetSecureEnabled");
-        jstring stringArg1 = minfo.env->NewStringUTF("placeholder");
-        jstring stringArg2 = minfo.env->NewStringUTF("false");
-        
-        if (value == true) {
-            stringArg2 = minfo.env->NewStringUTF("true");
-        }
-        
-        minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, stringArg0, stringArg1, stringArg2);
     }
 }
 

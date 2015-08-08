@@ -3,6 +3,12 @@
 
 #include "cocos2d.h"
 
+// Uncomment the following line to define FLURRY, or define it as per project-based (see Build Setting->Apple LLVM 6.0 - Preprocessing in XCode)
+//#define FLURRY
+#ifdef FLURRY
+#include "AnalyticX.h"
+#endif
+
 class HelloWorld : public cocos2d::CCLayer
 {
 public:
@@ -22,6 +28,9 @@ public:
 
     // implement the "static node()" method manually
     LAYER_NODE_FUNC(HelloWorld);
+
+private:
+    void printFlurryEventStatus(const char* name, AXFlurryEventRecordStatus status);
 };
 
 #endif // __HELLOWORLD_SCENE_H__

@@ -32,10 +32,6 @@ void AnalyticX::flurrySetSessionContinueSeconds(int seconds) {
     [Flurry setSessionContinueSeconds:seconds];
 }
 
-void AnalyticX::flurrySetSecureTransportEnabled(bool value) {
-    // Not available anymore.
-}
-
 void AnalyticX::flurrySetCrashReportingEnabled(bool value) {
     [Flurry setCrashReportingEnabled:value];
 }
@@ -48,31 +44,30 @@ void AnalyticX::flurryEndSession() {
     //Android only
 }
 
-void AnalyticX::flurryLogEvent(const char * eventName, ...) {
-    char szBuf[cocos2d::MAX_LOG_LENGTH];
+AXFlurryEventRecordStatus AnalyticX::flurryLogEvent(const char * eventName, ...) {
+    char szBuf[cocos2d::kMaxLogLen];
     
     va_list ap;
     va_start(ap, eventName);
     vsprintf(szBuf, eventName, ap);
     va_end(ap);
-
-    [Flurry logEvent:[AnalyticXStringUtil nsstringFromCString:szBuf]];
-}
-
-void AnalyticX::flurryLogEventWithParameters(const char * eventName, cocos2d::__Dictionary * parameters) {
     
-    [Flurry logEvent:[AnalyticXStringUtil nsstringFromCString:eventName] withParameters:[AnalyticXStringUtil nsDictionaryFromCCDictionary:parameters]];
+    return (AXFlurryEventRecordStatus)[Flurry logEvent:[AnalyticXStringUtil nsstringFromCString:szBuf]];
 }
 
-void AnalyticX::flurryLogEventTimed(const char * eventName, bool timed) {
-    [Flurry logEvent:[AnalyticXStringUtil nsstringFromCString:eventName] timed:timed];
+AXFlurryEventRecordStatus AnalyticX::flurryLogEventWithParameters(const char * eventName, cocos2d::CCDictionary * parameters) {
+    return (AXFlurryEventRecordStatus)[Flurry logEvent:[AnalyticXStringUtil nsstringFromCString:eventName] withParameters:[AnalyticXStringUtil nsDictionaryFromCCDictionary:parameters]];
 }
 
-void AnalyticX::flurryLogEventWithParametersTimed(const char * eventName, cocos2d::__Dictionary * parameters, bool timed) {
-    [Flurry logEvent:[AnalyticXStringUtil nsstringFromCString:eventName] withParameters:[AnalyticXStringUtil nsDictionaryFromCCDictionary:parameters] timed:timed];
+AXFlurryEventRecordStatus AnalyticX::flurryLogEventTimed(const char * eventName, bool timed) {
+    return (AXFlurryEventRecordStatus)[Flurry logEvent:[AnalyticXStringUtil nsstringFromCString:eventName] timed:timed];
 }
 
-void AnalyticX::flurryEndTimedEventWithParameters(const char * eventName, cocos2d::__Dictionary * parameters) {
+AXFlurryEventRecordStatus AnalyticX::flurryLogEventWithParametersTimed(const char * eventName, cocos2d::CCDictionary * parameters, bool timed) {
+    return (AXFlurryEventRecordStatus)[Flurry logEvent:[AnalyticXStringUtil nsstringFromCString:eventName] withParameters:[AnalyticXStringUtil nsDictionaryFromCCDictionary:parameters] timed:timed];
+}
+
+void AnalyticX::flurryEndTimedEventWithParameters(const char * eventName, cocos2d::CCDictionary * parameters) {
     [Flurry endTimedEvent:[AnalyticXStringUtil nsstringFromCString:eventName] withParameters:[AnalyticXStringUtil nsDictionaryFromCCDictionary:parameters]];
 }
 

@@ -1,17 +1,6 @@
 #include "HelloWorldScene.h"
 #include "SimpleAudioEngine.h"
 
-// Uncomment the following line to define FLURRY, or define it as per project-based (see Build Setting->Apple LLVM 6.0 - Preprocessing in XCode)
-//#define FLURRY
-
-#ifdef FLURRY
-#include "AnalyticX.h"
-#endif
-
-// always include this even FLURRY is not defined as it provides shorter code, and more flexible to log event with Flurry
-// note: it makes no harm even FLURRY is not defined to include this header
-#include "AnalyticXMacros.h"
-
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 #include <jni.h>
 #include "platform/android/jni/JniHelper.h"
@@ -98,7 +87,6 @@ bool HelloWorld::init()
     cocos2d::CCLog("--->>>get flurry version = %s", AnalyticX::flurryGetFlurryAgentVersion());
     AnalyticX::flurrySetDebugLogEnabled(true);
     AnalyticX::flurrySetSessionContinueSeconds(143);
-    AnalyticX::flurrySetSecureTransportEnabled(false);
     AnalyticX::flurrySetCrashReportingEnabled(true);
     
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
@@ -113,40 +101,61 @@ bool HelloWorld::init()
     AnalyticX::flurrySetGender("f");
     AnalyticX::flurrySetReportLocation(false);
     
-    AnalyticX::flurryLogEvent("event_3");
-    AnalyticX::flurryLogEventTimed(" log event timed test...", false);
+    // result status will be used below for various logging functions to check its success or failure
+    AXFlurryEventRecordStatus resultStatus;
 
+    // event_3
+    resultStatus = AnalyticX::flurryLogEvent("event_3");
+    printFlurryEventStatus("[test] event_3", resultStatus);
+
+    // event_4-notimed
+    resultStatus = AnalyticX::flurryLogEventTimed("event_4-notimed", false);
+    printFlurryEventStatus("[test] event_4-notimed", resultStatus);
+
+    AnalyticX::flurryEndTimedEventWithParameters("event_4-notimed", NULL);
+
+    // event_4-timed
+    resultStatus = AnalyticX::flurryLogEventTimed("event_4-timed", true);
+    printFlurryEventStatus("[test] event_4-timed", resultStatus);
+
+    AnalyticX::flurryEndTimedEventWithParameters("event_4-timed", NULL);
+
+    // form an object param
     CCDictionary *testDict = new CCDictionary();
     testDict->autorelease();
 
+    // - internal CCString as part of result object param
     CCString *testCCString;
 
     testCCString = CCString::stringWithCString("obj 0");
-
     testDict->setObject(testCCString, "key 0");
 
     testCCString = CCString::stringWithCString("obj 1");
-
     testDict->setObject(testCCString, "key 1");
     
+    // - internal dict as part of result object param
     CCDictionary* testDictInternal = new CCDictionary();
     testDictInternal->autorelease();
     
     testDict->setObject(testDictInternal, "key 2 : dictionary");
     
+    // - internal array as part of result object param
     CCArray* testArrayInternal = new CCArray();
     testArrayInternal->autorelease();
     
     testDict->setObject(testArrayInternal, "key 3 : array");
-    
     testDict->setObject(CCInteger::integerWithInt(5), "key 4 : int");
-    
     testDict->setObject(CCDirector::sharedDirector(), "key 5 : CCDirector");
 
-    AnalyticX::flurryLogEventWithParameters("event_5_with_params_no_timed", testDict);
+    // event_5-params-notimed
+    resultStatus = AnalyticX::flurryLogEventWithParameters("event_5-params-notimed", testDict);
+    printFlurryEventStatus("[test] event_5-params-notimed", resultStatus);
 
-    AnalyticX::flurryLogEventWithParametersTimed("test flurryLogEventWithParameters + timed", testDict, true);
-    AnalyticX::flurryEndTimedEventWithParameters("test end event...", NULL);
+    // event_5-params-timed
+    resultStatus = AnalyticX::flurryLogEventWithParametersTimed("event_5-params-timed", testDict, true);
+    printFlurryEventStatus("[test] event_5-params-timed", resultStatus);
+
+    AnalyticX::flurryEndTimedEventWithParameters("event_5-params-timed", NULL);
     
     AnalyticX::flurryLogPageView();
     
@@ -195,4 +204,14 @@ void HelloWorld::makeItCrash()
     // just create a NULL object and call any function to make it crash
     CCObject *obj = NULL;
     obj->retain();
+}
+
+void HelloWorld::printFlurryEventStatus(const char* name, AXFlurryEventRecordStatus status)
+{
+    if(status == AXFlurryEventRecorded)
+        printf("%s... logged successfully.\n", name);
+    else if(status == AXFlurryEventLoggingDelayed)
+        printf("%s logged successfully but delayed.\n", name);
+    else
+        printf("%s... failed to log.\n", name);
 }

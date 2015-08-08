@@ -15,7 +15,7 @@
 
 + (NSString *)nsstringFromCString:(const char *)cstring;
 + (const char *)cstringFromNSString:(NSString *)nsstring;
-+ (NSDictionary *)nsDictionaryFromCCDictionary:(cocos2d::__Dictionary *)ccDictionary;
++ (NSDictionary *)nsDictionaryFromCCDictionary:(cocos2d::CCDictionary *)ccDictionary;
 
 @end
 
