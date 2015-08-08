@@ -124,8 +124,8 @@ When running on an iOS device, these APIs will have no effect. They are safe and
     static void flurrySetReportLocation(bool reportLocation);
 
 #Note
-* Add-To-Your-Own-Project contains files necessary to copy to your own project. All of files required for Xcode project are there. But for Android, there're the package folder, a bridge file, and .jar file that you need to look into Android project folder and copy them yourself. They're left there for a reason.
-* copyResults.sh is a shell script to copy files to Add-To-Your-Own-Project folder automatically after the project is successfully built. This is meant to prevent mistake if developers do manual copy. It is included as Run Script phase inside XCode project.
+* `Add-To-Your-Own-Project` contains files necessary to copy to your own project. All of files required for Xcode project are there. But for Android, there're the package folder, a bridge file, and .jar file that you need to look into Android project folder and copy them yourself. They're left there for a reason.
+* `copyResults.sh` is a shell script to copy files to `Add-To-Your-Own-Project` folder automatically after the project is successfully built. This is meant to prevent mistake if developers do manual copy. It is included as Run Script phase inside XCode project.
 
 
 #Email: <diwufet@gmail.com>
