@@ -28,7 +28,7 @@ AXFlurryEventRecordStatus AnalyticX::flurryLogEvent(const char * eventName, ...)
     
     cocos2d::JniMethodInfo minfo;
     
-    bool isHave = cocos2d::JniHelper::getStaticMethodInfo(minfo,"com/diwublog/AnalyticX/AnalyticXBridge","Bridge", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V"); 
+    bool isHave = cocos2d::JniHelper::getStaticMethodInfo(minfo,"com/diwublog/AnalyticX/AnalyticXBridge","Bridge", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)I"); 
     
     if (!isHave) {
         // decided to use AXFlurryEventFailed as part of this error return value
@@ -48,7 +48,7 @@ AXFlurryEventRecordStatus AnalyticX::flurryLogEventTimed(const char * eventName,
     
     cocos2d::JniMethodInfo minfo;
     
-    bool isHave = cocos2d::JniHelper::getStaticMethodInfo(minfo,"com/diwublog/AnalyticX/AnalyticXBridge","Bridge", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V"); 
+    bool isHave = cocos2d::JniHelper::getStaticMethodInfo(minfo,"com/diwublog/AnalyticX/AnalyticXBridge","Bridge", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)I"); 
     
     if (!isHave) {
         //do nothing
@@ -70,7 +70,7 @@ AXFlurryEventRecordStatus AnalyticX::flurryLogEventTimed(const char * eventName,
 AXFlurryEventRecordStatus AnalyticX::flurryLogEventWithParameters(const char * eventName, cocos2d::CCDictionary * parameters) {
     cocos2d::JniMethodInfo minfo;
 
-    bool isHave = cocos2d::JniHelper::getStaticMethodInfo(minfo,"com/diwublog/AnalyticX/AnalyticXBridge","Bridge", "(Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;)V"); 
+    bool isHave = cocos2d::JniHelper::getStaticMethodInfo(minfo,"com/diwublog/AnalyticX/AnalyticXBridge","Bridge", "(Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;)I"); 
 
     if (!isHave) {
         //do nothing
@@ -89,7 +89,7 @@ AXFlurryEventRecordStatus AnalyticX::flurryLogEventWithParametersTimed(const cha
     
     cocos2d::JniMethodInfo minfo;
     
-    bool isHave = cocos2d::JniHelper::getStaticMethodInfo(minfo,"com/diwublog/AnalyticX/AnalyticXBridge","Bridge", "(Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;)V"); 
+    bool isHave = cocos2d::JniHelper::getStaticMethodInfo(minfo,"com/diwublog/AnalyticX/AnalyticXBridge","Bridge", "(Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;)I"); 
     
     if (!isHave) {
         //do nothing
@@ -114,7 +114,7 @@ void AnalyticX::flurryEndTimedEventWithParameters(const char * eventName, cocos2
     
     cocos2d::JniMethodInfo minfo;
     
-    bool isHave = cocos2d::JniHelper::getStaticMethodInfo(minfo,"com/diwublog/AnalyticX/AnalyticXBridge","Bridge", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V"); 
+    bool isHave = cocos2d::JniHelper::getStaticMethodInfo(minfo,"com/diwublog/AnalyticX/AnalyticXBridge","Bridge", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)I"); 
     
     if (!isHave) {
         //do nothing
@@ -123,7 +123,7 @@ void AnalyticX::flurryEndTimedEventWithParameters(const char * eventName, cocos2
         jstring stringArg1 = minfo.env->NewStringUTF(eventName);
         jstring stringArg2 = minfo.env->NewStringUTF("false");
         
-        minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, stringArg0, stringArg1, stringArg2);
+        minfo.env->CallStaticIntMethod(minfo.classID, minfo.methodID, stringArg0, stringArg1, stringArg2);
     }
 }
 
@@ -131,7 +131,7 @@ void AnalyticX::flurryLogPageView() {
     
     cocos2d::JniMethodInfo minfo;
     
-    bool isHave = cocos2d::JniHelper::getStaticMethodInfo(minfo,"com/diwublog/AnalyticX/AnalyticXBridge","Bridge", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V"); 
+    bool isHave = cocos2d::JniHelper::getStaticMethodInfo(minfo,"com/diwublog/AnalyticX/AnalyticXBridge","Bridge", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)I"); 
     
     if (!isHave) {
         //do nothing
@@ -140,7 +140,7 @@ void AnalyticX::flurryLogPageView() {
         jstring stringArg1 = minfo.env->NewStringUTF("placeholder");
         jstring stringArg2 = minfo.env->NewStringUTF("false");
         
-        minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, stringArg0, stringArg1, stringArg2);
+        minfo.env->CallStaticIntMethod(minfo.classID, minfo.methodID, stringArg0, stringArg1, stringArg2);
     }
 }
 
@@ -148,7 +148,7 @@ void AnalyticX::flurrySetAppVersion(const char * version) {
     
     cocos2d::JniMethodInfo minfo;
     
-    bool isHave = cocos2d::JniHelper::getStaticMethodInfo(minfo,"com/diwublog/AnalyticX/AnalyticXBridge","Bridge", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V"); 
+    bool isHave = cocos2d::JniHelper::getStaticMethodInfo(minfo,"com/diwublog/AnalyticX/AnalyticXBridge","Bridge", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)I"); 
     
     if (!isHave) {
         //do nothing
@@ -157,7 +157,7 @@ void AnalyticX::flurrySetAppVersion(const char * version) {
         jstring stringArg1 = minfo.env->NewStringUTF(version);
         jstring stringArg2 = minfo.env->NewStringUTF("false");
         
-        minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, stringArg0, stringArg1, stringArg2);
+        minfo.env->CallStaticIntMethod(minfo.classID, minfo.methodID, stringArg0, stringArg1, stringArg2);
     }
 }
 
@@ -186,7 +186,7 @@ void AnalyticX::flurrySetShowErrorInLogEnabled(bool value) {
 void AnalyticX::flurrySetDebugLogEnabled(bool value) {
     cocos2d::JniMethodInfo minfo;
     
-    bool isHave = cocos2d::JniHelper::getStaticMethodInfo(minfo,"com/diwublog/AnalyticX/AnalyticXBridge","Bridge", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V"); 
+    bool isHave = cocos2d::JniHelper::getStaticMethodInfo(minfo,"com/diwublog/AnalyticX/AnalyticXBridge","Bridge", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)I"); 
     
     if (!isHave) {
         //do nothing
@@ -199,7 +199,7 @@ void AnalyticX::flurrySetDebugLogEnabled(bool value) {
             stringArg2 = minfo.env->NewStringUTF("true");
         }
         
-        minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, stringArg0, stringArg1, stringArg2);
+        minfo.env->CallStaticIntMethod(minfo.classID, minfo.methodID, stringArg0, stringArg1, stringArg2);
     }
 }
 
@@ -220,7 +220,7 @@ void AnalyticX::flurryStartSession(const char * apiKey) {
     
     cocos2d::JniMethodInfo minfo;
     
-    bool isHave = cocos2d::JniHelper::getStaticMethodInfo(minfo,"com/diwublog/AnalyticX/AnalyticXBridge","Bridge", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V"); 
+    bool isHave = cocos2d::JniHelper::getStaticMethodInfo(minfo,"com/diwublog/AnalyticX/AnalyticXBridge","Bridge", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)I"); 
     
     if (!isHave) {
         //do nothing
@@ -229,7 +229,7 @@ void AnalyticX::flurryStartSession(const char * apiKey) {
         jstring stringArg1 = minfo.env->NewStringUTF(apiKey);
         jstring stringArg2 = minfo.env->NewStringUTF("false");
         
-        minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, stringArg0, stringArg1, stringArg2);
+        minfo.env->CallStaticIntMethod(minfo.classID, minfo.methodID, stringArg0, stringArg1, stringArg2);
     }
 }
 
@@ -237,7 +237,7 @@ void AnalyticX::flurryEndSession() {
     
     cocos2d::JniMethodInfo minfo;
     
-    bool isHave = cocos2d::JniHelper::getStaticMethodInfo(minfo,"com/diwublog/AnalyticX/AnalyticXBridge","Bridge", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V"); 
+    bool isHave = cocos2d::JniHelper::getStaticMethodInfo(minfo,"com/diwublog/AnalyticX/AnalyticXBridge","Bridge", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)I"); 
     
     if (!isHave) {
         //do nothing
@@ -246,7 +246,7 @@ void AnalyticX::flurryEndSession() {
         jstring stringArg1 = minfo.env->NewStringUTF("placeholder");
         jstring stringArg2 = minfo.env->NewStringUTF("false");
         
-        minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, stringArg0, stringArg1, stringArg2);
+        minfo.env->CallStaticIntMethod(minfo.classID, minfo.methodID, stringArg0, stringArg1, stringArg2);
     }
 }
 
@@ -254,7 +254,7 @@ void AnalyticX::flurrySetUserID(const char * userID) {
     
     cocos2d::JniMethodInfo minfo;
     
-    bool isHave = cocos2d::JniHelper::getStaticMethodInfo(minfo,"com/diwublog/AnalyticX/AnalyticXBridge","Bridge", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V"); 
+    bool isHave = cocos2d::JniHelper::getStaticMethodInfo(minfo,"com/diwublog/AnalyticX/AnalyticXBridge","Bridge", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)I"); 
     
     if (!isHave) {
         //do nothing
@@ -263,7 +263,7 @@ void AnalyticX::flurrySetUserID(const char * userID) {
         jstring stringArg1 = minfo.env->NewStringUTF(userID);
         jstring stringArg2 = minfo.env->NewStringUTF("false");
         
-        minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, stringArg0, stringArg1, stringArg2);
+        minfo.env->CallStaticIntMethod(minfo.classID, minfo.methodID, stringArg0, stringArg1, stringArg2);
     }
 }
 
@@ -285,7 +285,7 @@ void AnalyticX::flurrySetGender(const char * gender) {
     
     cocos2d::JniMethodInfo minfo;
     
-    bool isHave = cocos2d::JniHelper::getStaticMethodInfo(minfo,"com/diwublog/AnalyticX/AnalyticXBridge","Bridge", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V"); 
+    bool isHave = cocos2d::JniHelper::getStaticMethodInfo(minfo,"com/diwublog/AnalyticX/AnalyticXBridge","Bridge", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)I"); 
     
     if (!isHave) {
         //do nothing
@@ -298,7 +298,7 @@ void AnalyticX::flurrySetGender(const char * gender) {
             stringArg1 = minfo.env->NewStringUTF("male");
         }
         
-        minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, stringArg0, stringArg1, stringArg2);
+        minfo.env->CallStaticIntMethod(minfo.classID, minfo.methodID, stringArg0, stringArg1, stringArg2);
     }
     
 }
@@ -310,7 +310,7 @@ void AnalyticX::flurrySetLatitudeLongitudeHorizontalAccuracyVerticalAccuracy(dou
 void AnalyticX::flurrySetReportLocation(bool reportLocation) {
     cocos2d::JniMethodInfo minfo;
     
-    bool isHave = cocos2d::JniHelper::getStaticMethodInfo(minfo,"com/diwublog/AnalyticX/AnalyticXBridge","Bridge", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V"); 
+    bool isHave = cocos2d::JniHelper::getStaticMethodInfo(minfo,"com/diwublog/AnalyticX/AnalyticXBridge","Bridge", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)I"); 
     
     if (!isHave) {
         //do nothing
@@ -323,7 +323,7 @@ void AnalyticX::flurrySetReportLocation(bool reportLocation) {
             stringArg2 = minfo.env->NewStringUTF("true");
         }
         
-        minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, stringArg0, stringArg1, stringArg2);
+        minfo.env->CallStaticIntMethod(minfo.classID, minfo.methodID, stringArg0, stringArg1, stringArg2);
     }
 }
 
