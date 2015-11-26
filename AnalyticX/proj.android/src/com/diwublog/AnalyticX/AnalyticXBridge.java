@@ -5,29 +5,23 @@ import java.util.HashMap;
 import android.content.Context;
 import android.util.Log;
 
-import com.flurry.android.Constants;
-import com.flurry.android.FlurryAgent;
+import com.flurry.android.*;
 
 public class AnalyticXBridge {
 	
 	public static Context sessionContext;
 	
-	static void Bridge (String arg0, String arg1, String arg2) {
+	static int Bridge (String arg0, String arg1, String arg2) {
 
 		if (arg0.equalsIgnoreCase("flurryLogEvent")) {
-
-			AnalyticXBridge.flurryLogEvent(arg1);
+			return AnalyticXBridge.flurryLogEvent(arg1);
 		} else if (arg0.equalsIgnoreCase("flurryLogEventTimed")) {
-
-			AnalyticXBridge.flurryLogEventTimed(arg1, arg2);
+			return AnalyticXBridge.flurryLogEventTimed(arg1, arg2);
 		} else if (arg0.equalsIgnoreCase("flurryEndTimedEvent")) {
-
 			AnalyticXBridge.flurryEndTimedEvent(arg1);
 		} else if (arg0.equalsIgnoreCase("flurryLogPageView")) {
-			
 			AnalyticXBridge.flurryLogPageView();
 		} else if (arg0.equalsIgnoreCase("flurrySetAppVersion")) {
-			
 			AnalyticXBridge.flurrySetAppVersion(arg1);
 		} else if (arg0.equalsIgnoreCase("flurrySetLogEnabled")) {
 			AnalyticXBridge.flurrySetLogEnabled(arg2);
@@ -44,25 +38,26 @@ public class AnalyticXBridge {
 		} else if (arg0.equalsIgnoreCase("flurryReportLocation")) {
 			AnalyticXBridge.flurrySetReportLocation(arg2);
 		}
-			
+		return 1;
 	}
 	
-	static void Bridge (String arg0, String [] arg1, String arg2) {
+	static int Bridge (String arg0, String [] arg1, String arg2) {
 		Log.v("diwu", "string array count = " + arg1.length);
 		String[] splitedString = arg0.split(",");
 		if (splitedString[0].equalsIgnoreCase("flurryLogEventWithParameters")) {
-			AnalyticXBridge.flurryLogEventWithParameters(splitedString[1], arg1);
+			return AnalyticXBridge.flurryLogEventWithParameters(splitedString[1], arg1);
 		} else if (arg0.equalsIgnoreCase("flurryLogEventWithParametersTimed")) {
-			AnalyticXBridge.flurryLogEventWithParametersTimed(arg0, arg1, arg2);
+			return AnalyticXBridge.flurryLogEventWithParametersTimed(arg0, arg1, arg2);
 		}
+		return 1;
 	}
 	
-	static private AXFlurryEventRecordStatus flurryLogEvent(String eventID) {
+	static private int flurryLogEvent(String eventID) {
 		Log.v("diwu", "flurryLogEvent() is called... eventID = " + eventID);
-		return FlurryAgent.logEvent(eventID);
+		return FlurryAgent.logEvent(eventID).ordinal();
 	}
 	
-	static private AXFlurryEventRecordStatus flurryLogEventTimed(String eventID, String timed) {
+	static private int flurryLogEventTimed(String eventID, String timed) {
 		boolean timedBool = false;
 		if (timed.equalsIgnoreCase("false")) {
 			timedBool = false;
@@ -70,10 +65,10 @@ public class AnalyticXBridge {
 			timedBool = true;
 		}
 		Log.v("diwu", "flurryLogEventTimed(), eventID = " + eventID + ", timed = " + timedBool);
-		return FlurryAgent.logEvent(eventID, timedBool);
+		return FlurryAgent.logEvent(eventID, timedBool).ordinal();
 	}
 	
-	static private AXFlurryEventRecordStatus flurryLogEventWithParameters(String eventID, String [] parametersArray) {
+	static private int flurryLogEventWithParameters(String eventID, String [] parametersArray) {
 		Log.v("diwu", "flurryLogEventWithParameters... event id = " + eventID);
 
 		HashMap<String, String> someMap = new HashMap<String, String>();
@@ -84,10 +79,10 @@ public class AnalyticXBridge {
 			someMap.put(parametersArray[2*i], parametersArray[2*i+1]);
 		}
 		
-		return FlurryAgent.logEvent(eventID, someMap);
+		return FlurryAgent.logEvent(eventID, someMap).ordinal();
 	}
 	
-	static private AXFlurryEventRecordStatus flurryLogEventWithParametersTimed(String eventID, String [] parametersArray, String timed) {
+	static private int flurryLogEventWithParametersTimed(String eventID, String [] parametersArray, String timed) {
 
 		HashMap<String, String> someMap = new HashMap<String, String>();
 
@@ -104,7 +99,7 @@ public class AnalyticXBridge {
 		
 		Log.v("diwu", "flurryLogEventWithParametersTimed... event id = " + eventID + " timed = " + timedBool);
 
-		return FlurryAgent.logEvent(eventID, someMap, timedBool);
+		return FlurryAgent.logEvent(eventID, someMap, timedBool).ordinal();
 	}
 	
 	static private void flurryEndTimedEvent(String eventID) {
@@ -149,12 +144,13 @@ public class AnalyticXBridge {
 		
 		Log.v("diwu", "https is " + enabledBool);
 		
-		FlurryAgent.setUseHttps(enabledBool);
+		//FlurryAgent.setUseHttps(enabledBool);
 	}
 	
 	static private void flurryOnStartSession(String apiKey) {
 		Log.v("diwu", "is trying to start session... " + apiKey);
-		FlurryAgent.onStartSession(sessionContext, apiKey);
+		FlurryAgent.init(sessionContext, apiKey);
+		FlurryAgent.onStartSession(sessionContext);
 	}
 	
 	static private void flurryOnEndSession() {
