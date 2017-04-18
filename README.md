@@ -1,32 +1,32 @@
 ![Flurry Icon](http://pic.yupoo.com/diwup_v/BY5uWwj1/c1igU.png) ![-X Icon](http://pic.yupoo.com/diwup_v/BY5waKBY/MC5wD.png)
 
-#AnalyticX - With the latest 6.7.0 Flurry lib!!!
+# AnalyticX - With the latest 6.7.0 Flurry lib!!!
 A C++ wrapper of [Flurry](http://www.flurry.com/) for [Cocos2d-X](https://github.com/cocos2d/cocos2d-x). Supports Android and iOS.
 
-#Changelog
+# Changelog
 * Updated Flurry iOS SDK to version 6.7.0 and Flurry Android SDK to 5.3.0
 * Added reflection to AnalyticXStringUtil
 
-#Environment
+# Environment
 ***cocos2d-2.0-rc0a-x-0.1.0*** or higher is recommended. Lower versions are not tested. Due to the underlying difference in the ***CCDictionary*** implementation, there may be compatibility issues when running on lower versions.
 
-#Flurry SDK Version
+# Flurry SDK Version
 1. Android: v5.3.0
 2. iOS: v6.7.0
 
-#Example Project
+# Example Project
 1. iOS: ./AnalyticX.xcodeproj
 2. Android: ./AnalyticX/proj.android/
 
 ***You need to change the build script (such as build_native.sh for Mac OSX) according to your own environment before compiling***.
 
-#Add to Your Own Project - iOS (in `Add-To-Your-Own-Project` folder)
+# Add to Your Own Project - iOS (in `Add-To-Your-Own-Project` folder)
 1. Add ***FlurryAnalytics.h*** and ***libFlurryAnalytics.a*** to your Xcode project
 2. Add ***AnalyticX.h*** and ***AnalyticX.mm*** to your Xcode project
 3. Add ***AnalyticXStringUtil.h*** and ***AnalyticXStringUtil.mm*** to your Xcode project
 4. Add ***AnalyticXMacros.h*** to your XCode project
 
-#Add to Your Own Project - Android (in `Add-To-Yout-Own-Project` folder)
+# Add to Your Own Project - Android (in `Add-To-Yout-Own-Project` folder)
 1. Add ***com.diwublog.AnalyticX*** the package and its ***AnalyticXBridge.java*** to your Eclipse project
 2. Add ***FlurryAnalytics.jar*** as an external jar to your Eclipse project
 3. Drop ***AnalyticX.h*** and ***AnalyticX.cpp*** to your ***Classes*** folder
@@ -41,7 +41,7 @@ A C++ wrapper of [Flurry](http://www.flurry.com/) for [Cocos2d-X](https://github
 
     	<uses-permission android:name="android.permission.INTERNET"></uses-permission>
 
-#Add to Your Own Project - Hybrid
+# Add to Your Own Project - Hybrid
 1. Follow the iOS and Android set up steps separately
 2. iOS and Android will share the same ***AnalyticX.h*** and ***AnalyticXMacros.h*** header file
 3. Use Separate Flurry Api Keys for Android and iOS
@@ -70,7 +70,7 @@ A C++ wrapper of [Flurry](http://www.flurry.com/) for [Cocos2d-X](https://github
 
     	AnalyticX::flurryEndSession();
 
-#Best Practice Using Analytic Service or Any Third Party Framework#
+# Best Practice Using Analytic Service or Any Third Party Framework #
 1. Define FLURRY at the top of source code, or the source code that starts first before other
 
         #define FLURRY
@@ -89,7 +89,7 @@ A C++ wrapper of [Flurry](http://www.flurry.com/) for [Cocos2d-X](https://github
         FLURRYLogEvent("event_logging_via_macro dummy-num: %d - %d", 1, 2);
 
 
-#APIs Supported on both Android and iOS
+# APIs Supported on both Android and iOS
     static void flurrySetAppVersion(const char * version);
     static const char * flurryGetFlurryAgentVersion();
     static void flurrySetDebugLogEnabled(bool value);
@@ -108,7 +108,7 @@ A C++ wrapper of [Flurry](http://www.flurry.com/) for [Cocos2d-X](https://github
     static void flurrySetAge(int age);
     static void flurrySetGender(const char * gender);//"m" for male, "f" for female
 
-#APIs Supported only on iOS
+# APIs Supported only on iOS
 When running on an Android device, these APIs will have no effect. They are safe and won't crash.
 
     static void flurrySetShowErrorInLogEnabled(bool value);
@@ -117,21 +117,21 @@ When running on an Android device, these APIs will have no effect. They are safe
     static void flurrySetSessionReportsOnPauseEnabled(bool setSessionReportsOnPauseEnabled);
     static void flurrySetEventLoggingEnabled(bool value);
 
-#APIs Supported only on Android
+# APIs Supported only on Android
 When running on an iOS device, these APIs will have no effect. They are safe and won't crash.
 
     static void flurryEndSession();
     static void flurrySetReportLocation(bool reportLocation);
 
-#Note
+# Note
 * `Add-To-Your-Own-Project` contains files necessary to copy to your own project. All of files required for Xcode project are there. But for Android, there're the package folder, a bridge file, and .jar file that you need to look into Android project folder and copy them yourself. They're left there for a reason.
 * `copyResults.sh` is a shell script to copy files to `Add-To-Your-Own-Project` folder automatically after the project is successfully built. This is meant to prevent mistake if developers do manual copy. It is included as Run Script phase inside XCode project.
 
 
-#Email: <diwufet@gmail.com>
-#You're welcome to contribute. ;-)
+# Email: <diwufet@gmail.com>
+# You're welcome to contribute. ;-)
 
-#Contributors
+# Contributors
 * Di Wu
 * Anton Turko
 * François Dupayrat
